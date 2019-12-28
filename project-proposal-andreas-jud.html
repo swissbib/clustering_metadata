@@ -13124,7 +13124,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Author</strong> Andreas Jud&lt;/p&gt;
-<strong>Date</strong> 27-DEC-2019</p>
+<strong>Date</strong> 28-DEC-2019</p>
 
 </div>
 </div>
@@ -13613,7 +13613,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After the data preprocessing step, the indexing of the data is a central step in preparing the data for record pair comparison. During indexing, the full data set is split into blocks that hold similar entities. This splitting is called blocking [<a href="#data_matching">9</a>] and the resulting blocks are called preclusters. The preclusters are the starting point for explicit record comparison in the deduplication process, see <a href="#f_clustering">figure 4</a>. The indexing step is crucial in that an minimal size of the preclusters reduces the processing time of the record pair comparison. Machine learning algorithms can be used for identifying the optimal blocking key values [<a href="#data_matching">9</a>], see below.</p>
+<p>After the data preprocessing step, the indexing of the data is a central step in preparing the data for record pair comparison. During indexing, the full data set is split into blocks that hold similar entities. This splitting is called blocking [<a href="#data_matching">9</a>] and the resulting blocks are called preclusters. The preclusters are the starting point for explicit record comparison in the deduplication process, see <a href="#f_clustering">figure 4</a>. The indexing step is crucial in that a minimal size of the preclusters reduces the processing time of the record pair comparison. Machine learning algorithms can be used for identifying the optimal blocking key values [<a href="#data_matching">9</a>], see below.</p>
 
 </div>
 </div>
@@ -13631,7 +13631,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After indexing, the record comparison is done pairwise for all records in each precluster. The record pair comparison compares the predefined attributes of to records and derives a distance between them. A machine learning algorithm will be used for assessing the threshold between matching and non-matching record pairs, see below. The records will be marked and classified in the next step. Swissbib's test data will allow the assessment of the result during the last step of the process, the evaluation.</p>
+<p>After indexing, the record comparison is done pairwise for all records in each precluster. The record pair comparison compares predefined attributes of to records and derives a distance between them. A machine learning algorithm will be used for assessing the threshold between matching and non-matching record pairs, see below. The records will be marked and classified in the next step. Swissbib's test data will allow the assessment of the result during the last step of the process, the evaluation.</p>
 
 </div>
 </div>
@@ -14051,7 +14051,13 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>An important step of the general data matching process of <a href="#f_data_matching_process">figure 3</a> is indexing [<a href="#data_matching">9</a>]. The challenge of this step is to find the best blocking keys [<a href="#data_matching">9</a>]. A machine learning method will be tested to identify the best keys.</p>
+<p>An important step of the general data matching process of <a href="#f_data_matching_process">figure 3</a> is indexing. The challenge of this step is to find the best blocking keys, i.e. the blocking keys (i) generate the smallest possible preclusters where (ii) all true matches are included in the candidate record pairs [<a href="#data_matching">9</a>]. Three kinds of quality of candidate attributes need to be considered when defining blocking keys [<a href="#data_matching">9</a>].</p>
+<ul>
+<li>The degree and quality of filling of the attribute should be as high as possible.</li>
+<li>The frequency distribution of the values in the attribute should be close to uniform.</li>
+<li>The trade-off between number and size of the resulting blocks is to be decided.</li>
+</ul>
+<p>A machine learning method will be tested to identify the best blocking keys.<br><strong>Question : Does Swissbib have training data for preclustering? How does Swissbib do preclustering?</strong></p>
 
 </div>
 </div>
@@ -14114,8 +14120,8 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <p>The following machine learning models will be used in the course of the capstone project.</p>
 <ul>
 <li>Principal Component Analysis with the goal to understanding the text string data, see section 3b).</li>
-<li>The model used to find the best blocking keys, see section 3b), is undecided, yet.</li>
-<li>In [<a href="#padmanaban2012">11</a>], a deduplication methond based on an artificial neural network is described. The result of this reference will be tried to reproduce for the given data.</li>
+<li>The model to be used to find the best blocking keys, see section 3b), is undecided, yet.<br><strong>Problem : It is unclear, whether Swissbib has training data out of preclustering.</strong></li>
+<li>In [<a href="#padmanaban2012">11</a>], a deduplication method based on an artificial neural network is described. The result of this reference will be tried to reproduce for the given data.</li>
 <li>The Python ecosystem offers Dedupe as a library for deduplication with machine learning [<a href="#python_dedupe">12</a>]. The result of the artificial neural network will be compared to the result with this library.</li>
 </ul>
 
