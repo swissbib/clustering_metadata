@@ -13481,7 +13481,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A data record provided by Swissbib consists of a set of data elements filled with their values. The structure and contents of the data records are based on the <a href="https://en.wikipedia.org/wiki/MARC_standards">MARC 21 Format for Bibliographic Data</a>, [<a href="#marc21">6</a>]. Within the scope of the capstone project, the data records will be reduced to a narrow set of the available attributes of the MARC 21 standard. The reduction focusses on the attributes that are used for deduplication with the already implemented logic. This reduction is done in a separate data export with a scala implementation, developped by a Swissbib project memeber specifically for the capstone project, see orange coloured part of <a href="#f_basic_data_flow">figure 1</a>. The resulting output of the data preprocessing by Swissbib will be one or more files in a <a href="https://www.json.org/json-en.html">json</a> format. These files will be read into Python for the data analysis and manipulation in the scope of the capstone project.</p>
+<p>A data record provided by Swissbib consists of a set of data elements filled with their values. The structure and contents of the data records are based on the <a href="https://en.wikipedia.org/wiki/MARC_standards">MARC 21 Format for Bibliographic Data</a>, [<a href="#marc21">6</a>]. Within the scope of the capstone project, the data records will be reduced to a narrow set of the available attributes of the MARC 21 standard. The reduction focusses on the attributes that are used for deduplication with the already implemented logic. This reduction is done in a separate data export with a scala implementation, developped by a Swissbib project memeber specifically for the capstone project [<a href="#scala_repo">7</a>], see orange coloured part of <a href="#f_basic_data_flow">figure 1</a>. The resulting output of the data preprocessing by Swissbib will be one or more files in a <a href="https://www.json.org/json-en.html">json</a> format. These files will be read into Python for the data analysis and manipulation in the scope of the capstone project.</p>
 
 </div>
 </div>
@@ -13489,7 +13489,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The list of attributes that will be used as a starting point for the capstone project is documented in [<a href="#feature_deduplication_wiki">7</a>]. Some additional attributes out of the MARC 21 attribute definition may be identified and added optionally during the project. This option can be taken if additional attributes help to enhance the deduplication process.</p>
+<p>The list of attributes that will be used as a starting point for the capstone project is documented in [<a href="#feature_deduplication_wiki">8</a>]. Some additional attributes out of the MARC 21 attribute definition may be identified and added optionally during the project. This option can be taken if additional attributes help to enhance the deduplication process.</p>
 
 </div>
 </div>
@@ -13566,9 +13566,9 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Count of records in file ...
-- slave	 596
+- slave	 435
 - master 159
-- unique 435
+- unique 596
 </pre>
 </div>
 </div>
@@ -13587,7 +13587,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The capstone project will follow a general data matching process, described in [<a href="#data_matching">8</a>], see <a href="#f_data_matching_process">figure 3</a>.</p>
+<p>The capstone project will follow a general data matching process, described in [<a href="#data_matching">9</a>], see <a href="#f_data_matching_process">figure 3</a>.</p>
 
 </div>
 </div>
@@ -13596,7 +13596,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <center>
-    <b>Figure 3</b><a id='f_data_matching_process'></a> General data matching process [8].
+    <b>Figure 3</b><a id='f_data_matching_process'></a> General data matching process [9].
     <img src="./documentation/datamatching_process.png" style="width: 400px;"/></p>
 </center>
 </div>
@@ -13613,7 +13613,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After the data preprocessing step, the indexing of the data is a central step in preparing the data for record pair comparison. During indexing, the full data set is split into blocks that hold similar entities. This splitting is called blocking [<a href="#data_matching">8</a>] and the resulting blocks are called preclusters. The preclusters are the starting point for explicit record comparison in the deduplication process, see <a href="#f_clustering">figure 4</a>. The indexing step is crucial in that an minimal size of the preclusters reduces the processing time of the record pair comparison. Machine learning algorithms can be used for identifying the optimal blocking key values [<a href="#data_matching">8</a>], see below.</p>
+<p>After the data preprocessing step, the indexing of the data is a central step in preparing the data for record pair comparison. During indexing, the full data set is split into blocks that hold similar entities. This splitting is called blocking [<a href="#data_matching">9</a>] and the resulting blocks are called preclusters. The preclusters are the starting point for explicit record comparison in the deduplication process, see <a href="#f_clustering">figure 4</a>. The indexing step is crucial in that an minimal size of the preclusters reduces the processing time of the record pair comparison. Machine learning algorithms can be used for identifying the optimal blocking key values [<a href="#data_matching">9</a>], see below.</p>
 
 </div>
 </div>
@@ -13725,263 +13725,263 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
   <tbody>
     <tr>
       <th>0</th>
-      <td>[(OCoLC)362722306, (ABN)000551177]</td>
-      <td>23456789</td>
+      <td>[(OCoLC)731635279, (ABN)000539983]</td>
+      <td>2009</td>
       <td>[]</td>
       <td>[]</td>
-      <td>23456789</td>
-      <td>000143235</td>
+      <td>2009</td>
+      <td>000311049</td>
+      <td>[]</td>
       <td></td>
+      <td>2009</td>
+      <td>[BK020000]</td>
+      <td>[978-3-15-020008-7]</td>
+      <td>[]</td>
       <td></td>
-      <td></td>
-      <td>BK020000</td>
-      <td>978-3-7466-6120-9</td>
-      <td></td>
-      <td></td>
-      <td>[6120]</td>
-      <td>[6120]</td>
-      <td>[Austen, Jane, 1775-1817, (DE-588)118505173, J...</td>
-      <td>Aufbau Taschenbuch</td>
-      <td>[Aufbau Taschenbuch]</td>
-      <td></td>
+      <td>[600 S.]</td>
+      <td>[20008]</td>
+      <td>[[GraweChristian, GraweUrsula], [Jane Austen ;...</td>
+      <td>[Reclam jun.]</td>
+      <td>[Reclam jun.]</td>
+      <td>2009</td>
       <td></td>
       <td>[Emma, Roman]</td>
       <td>[Emma, Roman]</td>
-      <td>575 S.</td>
+      <td>[600 S.]</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>[(OCoLC)886929897, (ABN)000223034]</td>
-      <td>234</td>
+      <td>[(OCoLC)808324878, (ABN)000155059]</td>
+      <td>2000</td>
       <td>[]</td>
-      <td>[Wiener Philharmoniker]</td>
-      <td>234</td>
-      <td>00044801X</td>
+      <td>[Metropolitan Opera Orchestra, Metropolitan Op...</td>
+      <td>2000</td>
+      <td>00130724X</td>
+      <td>[]</td>
       <td></td>
-      <td></td>
-      <td></td>
-      <td>MU040100</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>2000</td>
+      <td>[VM010300]</td>
       <td>[]</td>
       <td>[]</td>
-      <td>[Mozart, Wolfgang Amadeus, 1756-1791, (DE-588)...</td>
-      <td>Membran</td>
-      <td>[Membran]</td>
       <td></td>
+      <td>[1 DVD-Video, DVD Region 0, 169 Min., farb.]</td>
+      <td>[]</td>
+      <td>[[MozartWolfgang Amadeus, LevineJames, Schikan...</td>
+      <td>[Deutsche Grammophon]</td>
+      <td>[Deutsche Grammophon]</td>
+      <td>2000</td>
       <td></td>
-      <td>[Die Zauberflöte]</td>
-      <td>[Die Zauberflöte]</td>
-      <td>2 CD</td>
+      <td>[Die Zauberflöte, Oper in zwei Aufzügen]</td>
+      <td>[Die Zauberflöte, Oper in zwei Aufzügen]</td>
+      <td>[1 DVD-Video, DVD Region 0, 169 Min., farb.]</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>[(OCoLC)778386601, (ABN)000433604]</td>
-      <td>123</td>
+      <td>[(OCoLC)231772550, (ABN)000096920]</td>
+      <td>1999</td>
       <td>[]</td>
       <td>[]</td>
-      <td>123</td>
-      <td>000996009</td>
-      <td></td>
-      <td></td>
-      <td>1234567</td>
-      <td>MU010000</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>1999</td>
+      <td>001817272</td>
       <td>[]</td>
-      <td>[]</td>
-      <td>[Mozart, Wolfgang Amadeus, Wolfgang Amadeus Mo...</td>
-      <td>Komm. Breitkopf</td>
-      <td>[Komm. Breitkopf]</td>
-      <td>1234567</td>
       <td></td>
-      <td>[Die Zauberflöte, eine grosse Oper in zwey Auf...</td>
-      <td>[Die Zauberflöte, eine grosse Oper in zwey Auf...</td>
-      <td>202 S.</td>
+      <td>1999</td>
+      <td>[BK020000]</td>
+      <td>[3-495-47879-5]</td>
+      <td>[]</td>
+      <td></td>
+      <td>[316 S.]</td>
+      <td>[]</td>
+      <td>[[Andreas Flury]]</td>
+      <td>[Alber]</td>
+      <td>[Alber]</td>
+      <td>1999</td>
+      <td></td>
+      <td>[Der moralische Status der Tiere, Henry Salt, ...</td>
+      <td>[Der moralische Status der Tiere, Henry Salt, ...</td>
+      <td>[316 S.]</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>[(OCoLC)778561839, (ABN)000238844]</td>
+      <td>[(OCoLC)887157168, (ABN)000223912]</td>
+      <td>uuuu</td>
+      <td>[]</td>
+      <td>[]</td>
+      <td>uuuu</td>
+      <td>00236865X</td>
+      <td>[]</td>
       <td></td>
+      <td>uuuuuuuu</td>
+      <td>[BK020000]</td>
       <td>[]</td>
       <td>[]</td>
       <td></td>
-      <td>00239538X</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>BK020047</td>
-      <td>3-932992-42-3</td>
-      <td></td>
-      <td></td>
+      <td>[412 S.]</td>
       <td>[]</td>
-      <td>[]</td>
-      <td>[Frisch, Max, 1911-1991, (DE-588)118536109, Ma...</td>
-      <td>Terzio</td>
-      <td>[Terzio]</td>
+      <td>[[]]</td>
+      <td>[Ernst Eulenburg]</td>
+      <td>[Ernst Eulenburg]</td>
+      <td>uuuuuuuu</td>
       <td></td>
-      <td></td>
-      <td>[Homo faber, Originaltext, Interpretation, Bio...</td>
-      <td>[Homo faber, Originaltext, Interpretation, Bio...</td>
-      <td>1 CD-Rom in Box, mit Notizbuchfunktion für Ref...</td>
+      <td>[Die Zauberflöte]</td>
+      <td>[Die Zauberflöte]</td>
+      <td>[412 S.]</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>[(OCoLC)777853583, (ABN)000243260]</td>
-      <td></td>
+      <td>[(OCoLC)887324690, (ABN)000548154]</td>
+      <td>2008</td>
       <td>[]</td>
       <td>[]</td>
-      <td></td>
-      <td>002410559</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>BK020000</td>
-      <td>0-19-282756-1</td>
-      <td></td>
-      <td></td>
+      <td>2008</td>
+      <td>00351031X</td>
       <td>[]</td>
-      <td>[]</td>
-      <td>[Austen, Jane, 1775-1817, (DE-588)118505173, J...</td>
-      <td>Oxford University Press</td>
-      <td>[Oxford University Press]</td>
       <td></td>
+      <td>2008</td>
+      <td>[BK020000]</td>
+      <td>[978-1-4058-8214-9]</td>
+      <td>[]</td>
+      <td></td>
+      <td>[64 S.]</td>
+      <td>[]</td>
+      <td>[[StrangeJoanna], [Jane Austen ; retold by Joa...</td>
+      <td>[Pearson Education]</td>
+      <td>[Pearson Education]</td>
+      <td>2008</td>
       <td></td>
       <td>[Emma]</td>
       <td>[Emma]</td>
-      <td>445 p.</td>
+      <td>[64 S.]</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>[(OCoLC)887199526, (ABN)000323695]</td>
-      <td>234567</td>
+      <td>[(OCoLC)180154028, (ABN)000308006]</td>
+      <td>2007</td>
       <td>[]</td>
       <td>[]</td>
-      <td>234567</td>
-      <td>002503042</td>
+      <td>2007</td>
+      <td>003517837</td>
+      <td>[]</td>
+      <td>1. Aufl</td>
+      <td>2007</td>
+      <td>[BK020000]</td>
+      <td>[978-3-7815-1531-4, 3-7815-1531-1]</td>
+      <td>[]</td>
       <td></td>
-      <td>Schweiz 2007, SF1 01.03.2007</td>
+      <td>[304 S.]</td>
+      <td>[]</td>
+      <td>[[Gläser-ZikudaMichaela], [Hrsg. Michaela Gläs...</td>
+      <td>[Klinkhardt]</td>
+      <td>[Klinkhardt]</td>
+      <td>2007</td>
       <td></td>
-      <td>VM010300</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>["Die Zauberflöte" auf 2 Kanälen]</td>
-      <td>["Die Zauberflöte" auf 2 Kanälen]</td>
-      <td>[Mozart, Wolfgang Amadeus, Harnoncourt, Nikola...</td>
-      <td>AKSA</td>
-      <td>[AKSA]</td>
-      <td></td>
-      <td></td>
-      <td>[Die Zauberflöte]</td>
-      <td>[Die Zauberflöte]</td>
-      <td>2 DVD-Video (192 Min.)</td>
+      <td>[Lernprozesse dokumentieren, reflektieren und ...</td>
+      <td>[Lernprozesse dokumentieren, reflektieren und ...</td>
+      <td>[304 S.]</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>[(OCoLC)887344137, (ABN)000567256]</td>
-      <td></td>
+      <td>[(OCoLC)605622457, (ABN)000234417]</td>
+      <td>1988</td>
       <td>[]</td>
       <td>[]</td>
+      <td>1988</td>
+      <td>003555208</td>
+      <td>[]</td>
       <td></td>
-      <td>003565882</td>
+      <td>1988</td>
+      <td>[MU040100]</td>
+      <td>[]</td>
+      <td>[]</td>
+      <td>Teldec</td>
+      <td>[2 Compact Discs in Box]</td>
+      <td>[]</td>
+      <td>[[HarnoncourtNikolaus], [Mozart]]</td>
+      <td>[Teldec]</td>
+      <td>[Teldec]</td>
+      <td>1988</td>
       <td></td>
-      <td></td>
-      <td></td>
-      <td>VM010300</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>[Z1]</td>
-      <td>[Z1]</td>
-      <td>[Schlöndorff, Volker, Frisch, Max, 1911-1991, ...</td>
-      <td>Absolut Medien</td>
-      <td>[Absolut Medien]</td>
-      <td></td>
-      <td></td>
-      <td>[Homo faber]</td>
-      <td>[Homo faber]</td>
-      <td>1 DVD-Video (117 Min.)</td>
+      <td>[Die Zauberflöte]</td>
+      <td>[Die Zauberflöte]</td>
+      <td>[2 Compact Discs in Box]</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>[(OCoLC)315725021, (ABN)000666789]</td>
-      <td>2345678</td>
+      <td>[(OCoLC)887393628, (ABN)000218626]</td>
+      <td>2002</td>
+      <td>[]</td>
+      <td>[Opernhaus Orchester Zürich]</td>
+      <td>2002</td>
+      <td>003959953</td>
+      <td>[]</td>
+      <td></td>
+      <td>2002</td>
+      <td>[VM010300]</td>
       <td>[]</td>
       <td>[]</td>
-      <td>2345678</td>
-      <td>003813509</td>
       <td></td>
+      <td>[2 DVD]</td>
+      <td>[]</td>
+      <td>[[]]</td>
+      <td>[TDK Recording Media Europe]</td>
+      <td>[TDK Recording Media Europe]</td>
+      <td>2002</td>
       <td></td>
-      <td></td>
-      <td>BK020000</td>
-      <td>3-15-002620-2</td>
-      <td></td>
-      <td></td>
-      <td>[2620]</td>
-      <td>[2620]</td>
-      <td>[Mozart, Wolfgang Amadeus, 1756-1791, (DE-588)...</td>
-      <td>Reclam</td>
-      <td>[Reclam]</td>
-      <td></td>
-      <td></td>
-      <td>[Die Zauberflöte, KV 620 : eine grosse Oper in...</td>
-      <td>[Die Zauberflöte, KV 620 : eine grosse Oper in...</td>
-      <td>88 S.</td>
+      <td>[Die Zauberflöte]</td>
+      <td>[Die Zauberflöte]</td>
+      <td>[2 DVD]</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>[(OCoLC)887396789, (ABN)000628911]</td>
-      <td>234567</td>
+      <td>[(OCoLC)778329562, (ABN)000048149]</td>
+      <td>1979</td>
+      <td>[]</td>
+      <td>[Schweizerische Gesellschaft für Bildungsforsc...</td>
+      <td>1979</td>
+      <td>005047420</td>
+      <td>[]</td>
+      <td></td>
+      <td>19791999</td>
+      <td>[CR030600]</td>
+      <td>[0252-9955]</td>
+      <td>[]</td>
+      <td></td>
       <td>[]</td>
       <td>[]</td>
-      <td>234567</td>
-      <td>004130235</td>
+      <td>[[hrsg. von der Schweizerischen Gesellschaft f...</td>
+      <td>[Universitätsverlag]</td>
+      <td>[Universitätsverlag]</td>
+      <td>19791999</td>
       <td></td>
-      <td></td>
-      <td></td>
-      <td>BK020000</td>
-      <td>978-0-307-38684-7</td>
-      <td></td>
-      <td></td>
+      <td>[Bildungsforschung und Bildungspraxis]</td>
+      <td>[Bildungsforschung und Bildungspraxis]</td>
       <td>[]</td>
-      <td>[]</td>
-      <td>[Austen, Jane, 1775-1817, (DE-588)118505173, J...</td>
-      <td>Vintage Books</td>
-      <td>[Vintage Books]</td>
-      <td></td>
-      <td></td>
-      <td>[Emma]</td>
-      <td>[Emma]</td>
-      <td>495 S.</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>[(OCoLC)778331282, (ABN)000078381]</td>
-      <td>123456</td>
+      <td>[(OCoLC)780137741, (ABN)000669941]</td>
+      <td>2012</td>
       <td>[]</td>
       <td>[]</td>
-      <td>123456</td>
-      <td>005091411</td>
-      <td></td>
-      <td></td>
-      <td>123456789</td>
-      <td>CR030300</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>2012</td>
+      <td>005396816</td>
       <td>[]</td>
-      <td>[]</td>
-      <td>[]</td>
-      <td>Universitätsverlag</td>
-      <td>[Universitätsverlag]</td>
-      <td>123456789</td>
       <td></td>
-      <td>[Bildungsforschung und Bildungspraxis. Beiheft...</td>
-      <td>[Bildungsforschung und Bildungspraxis. Beiheft...</td>
+      <td>2012</td>
+      <td>[BK020300]</td>
+      <td>[978-3-7255-6535-1]</td>
+      <td>[]</td>
       <td></td>
+      <td>[244 S.]</td>
+      <td>[Bd. 63]</td>
+      <td>[[Beatrice Käser]]</td>
+      <td>[Schulthess]</td>
+      <td>[Schulthess]</td>
+      <td>2012</td>
+      <td></td>
+      <td>[Sozialleistungsbetrug - Sozialversicherungsbe...</td>
+      <td>[Sozialleistungsbetrug - Sozialversicherungsbe...</td>
+      <td>[244 S.]</td>
     </tr>
   </tbody>
 </table>
@@ -14004,7 +14004,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A first sample data delivery by Swissbib's project team in the form of a json file with a number of 183'407 records dating from 10.11.2019 has revealed information of the features that is summarized in a table of Swissbib's Wiki pages [<a href="#feature_deduplication_wiki">7</a>]. These attributes cover a wide range of data types like strings of text, codes, and numbers. On the other hand, the data shows missing values in most of the attributes.</p>
+<p>A first sample data delivery by Swissbib's project team in the form of a json file with a number of 183'407 records dating from 10.11.2019 has revealed information of the features that is summarized in a table of Swissbib's Wiki pages [<a href="#feature_deduplication_wiki">8</a>]. These attributes cover a wide range of data types like strings of text, codes, and numbers. On the other hand, the data shows missing values in most of the attributes.</p>
 
 </div>
 </div>
@@ -14012,10 +14012,10 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In a first step, the quality of the data extract for the capstone project, see orange coloured data path of <a href="#f_basic_data_flow">figure 1</a>, has to be verified and improved to a satisfying level. This will be done the following activities.</p>
+<p>In a first step, the quality of the data extract for the capstone project, see orange coloured data path of <a href="#f_basic_data_flow">figure 1</a>, has to be verified and improved to a satisfying level [<a href="#scala_repo">7</a>]. This will be done the following activities.</p>
 <ul>
 <li>Investigating missing values and the degree of filling of the features together with plausibility checks.</li>
-<li>Refining the structure of the data. As an example, the features ttlfull and person are a list of comma-separated strings originating in combinations of several parts of the MARC 21 data strucutre, see [<a href="#feature_deduplication_wiki">7</a>]. This superstructuring has to be questioned.</li>
+<li>Refining the structure of the data. As an example, the features ttlfull and person are a list of comma-separated strings originating in combinations of several parts of the MARC 21 data strucutre, see [<a href="#feature_deduplication_wiki">8</a>]. This superstructuring has to be questioned.</li>
 <li>Analysing and eventually refining the features with strings of text in the data.</li>
 <li>Checking for plausibilities with the help of relationships between features.</li>
 <li>Checking for outliers.</li>
@@ -14028,7 +14028,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A first basic data analysis has been done already in the near past. As the underlying json data file is too big for being checked in, a reference to an html export of the Jupyter Notebook is added here [<a href="#data_preparation">9</a>]. This data analysis will be elaborated during the capstone project.</p>
+<p>A first basic data analysis has been done already in the near past. As the underlying json data file is too big for being checked in, a reference to an html export of the Jupyter Notebook is added here [<a href="#data_preparation">10</a>]. This data analysis will be elaborated during the capstone project.</p>
 
 </div>
 </div>
@@ -14051,7 +14051,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>An important step of the general data matching process of <a href="#f_data_matching_process">figure 3</a> is indexing [<a href="#data_matching">8</a>]. The challenge of this step is to find the best blocking keys [<a href="#data_matching">8</a>]. A machine learning method will be tested to identify the best keys.</p>
+<p>An important step of the general data matching process of <a href="#f_data_matching_process">figure 3</a> is indexing [<a href="#data_matching">9</a>]. The challenge of this step is to find the best blocking keys [<a href="#data_matching">9</a>]. A machine learning method will be tested to identify the best keys.</p>
 
 </div>
 </div>
@@ -14059,7 +14059,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The Swissbib data contains more attributes than the list of features for deduplication [<a href="#feature_deduplication_wiki">7</a>]. The degree of filling and the quality of these additional attributes and potential features is unknown, at the moment. One task might be to identify additional promising features for the goal of the capstone project with the help of the MARC 21 documentation [<a href="#marc21">6</a>]. If such a promising feature can be identified, the Swissbib project team will be asked to add it to their data extract.</p>
+<p>The Swissbib data contains more attributes than the list of features for deduplication [<a href="#feature_deduplication_wiki">8</a>]. The degree of filling and the quality of these additional attributes and potential features is unknown, at the moment. One task might be to identify additional promising features for the goal of the capstone project with the help of the MARC 21 documentation [<a href="#marc21">6</a>]. If such a promising feature can be identified, the Swissbib project team will be asked to add it to their data extract.</p>
 
 </div>
 </div>
@@ -14096,7 +14096,7 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The goal of the capstone project is to implement and train an artificial neural network for deduplication [<a href="#padmanaban2012">10</a>] of library catalogue data in MARC 21 format. The neural network will be trained and tested with Swissbib's test data for deduplication.</p>
+<p>The goal of the capstone project is to implement and train an artificial neural network for deduplication [<a href="#padmanaban2012">11</a>] of library catalogue data in MARC 21 format. The neural network will be trained and tested with Swissbib's test data for deduplication.</p>
 
 </div>
 </div>
@@ -14115,8 +14115,8 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 <ul>
 <li>Principal Component Analysis with the goal to understanding the text string data, see section 3b).</li>
 <li>The model used to find the best blocking keys, see section 3b), is undecided, yet.</li>
-<li>In [<a href="#padmanaban2012">10</a>], a deduplication methond based on an artificial neural network is described. The result of this reference will be tried to reproduce for the given data.</li>
-<li>The Python ecosystem offers Dedupe as a library for deduplication with machine learning [<a href="#python_dedupe">11</a>]. The result of the artificial neural network will be compared to the result with this library.</li>
+<li>In [<a href="#padmanaban2012">11</a>], a deduplication methond based on an artificial neural network is described. The result of this reference will be tried to reproduce for the given data.</li>
+<li>The Python ecosystem offers Dedupe as a library for deduplication with machine learning [<a href="#python_dedupe">12</a>]. The result of the artificial neural network will be compared to the result with this library.</li>
 </ul>
 
 </div>
@@ -14168,11 +14168,12 @@ Some parts of the data is under protection, though, cp. [<a href="#swissbib_prot
 [4<a id='cc0'></a>] - <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">https://creativecommons.org/share-your-work/public-domain/cc0/</a>, Creative Commons CC0 license documentation.<br>
 [5<a id='swissbib_protected'></a>] - <a href="https://data.swissbib.ch/bibliographicResource">https://data.swissbib.ch/bibliographicResource</a>, Documentation of Swissbib's protected data.<br>
 [6<a id='marc21'></a>] - <a href="https://www.loc.gov/marc/bibliographic/">https://www.loc.gov/marc/bibliographic/</a>, MARC 21 format description for bibliographic data, <a href='https://www.loc.gov/librarians/standards'>Library of Congress</a><br>
-[7<a id='feature_deduplication_wiki'></a>] - <a href="http://www.swissbib.org/wiki/index.php?title=Features_Deduplication">http://www.swissbib.org/wiki/index.php?title=Features_Deduplication</a>, Wikipedia site created for documentation of features for deduplication.<br>
-[8<a id='data_matching'></a>] - <em>Data Matching - Concepts and Techniques for Record Linkage, Entity Resolution, and Duplicate Detection</em>, Peter Christen, Springer-Verlag 2012.<br>
-[9<a id='data_preparation'></a>] - <a href="./01_First_Data_Analysis.html">01_First_Data_Analysis</a>, First data analysis by Andreas Jud.<br>
-[10<a id='padmanaban2012'></a>] - <em>An approach based on artificial neural network for data deduplication</em>, M. Padmanaban, T. Bhuvaneswari, International Journal of Computer Science and Information Technologies, Vol. 3(4), 2012, 4637-4644.<br>
-[11<a id='python_dedupe'></a>] - <a href="https://docs.dedupe.io/en/latest/">https://docs.dedupe.io/en/latest/</a>, Dedupe library that uses machine learning to perform de-duplication and entity resolution on structured data.<br></p>
+[7<a id='scala_repo'></a>] - <a href="https://github.com/guenterh/andreas_cluster_features">https://github.com/guenterh/andreas_cluster_features</a>, Repository to scala code for data extraction.<br>
+[8<a id='feature_deduplication_wiki'></a>] - <a href="http://www.swissbib.org/wiki/index.php?title=Features_Deduplication">http://www.swissbib.org/wiki/index.php?title=Features_Deduplication</a>, Wikipedia site created for documentation of features for deduplication.<br>
+[9<a id='data_matching'></a>] - <em>Data Matching - Concepts and Techniques for Record Linkage, Entity Resolution, and Duplicate Detection</em>, Peter Christen, Springer-Verlag 2012.<br>
+[10<a id='data_preparation'></a>] - <a href="./01_First_Data_Analysis.html">01_First_Data_Analysis</a>, First data analysis by Andreas Jud.<br>
+[11<a id='padmanaban2012'></a>] - <em>An approach based on artificial neural network for data deduplication</em>, M. Padmanaban, T. Bhuvaneswari, International Journal of Computer Science and Information Technologies, Vol. 3(4), 2012, 4637-4644.<br>
+[12<a id='python_dedupe'></a>] - <a href="https://docs.dedupe.io/en/latest/">https://docs.dedupe.io/en/latest/</a>, Dedupe library that uses machine learning to perform de-duplication and entity resolution on structured data.<br></p>
 
 </div>
 </div>
