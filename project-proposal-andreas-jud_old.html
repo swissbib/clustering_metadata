@@ -13124,7 +13124,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Author</strong> Andreas Jud&lt;/p&gt;
-<strong>Date</strong> 30-DEC-2019</p>
+<strong>Date</strong> 28-DEC-2019</p>
 
 </div>
 </div>
@@ -13162,8 +13162,18 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Swissbib receives electronic catalogue data of all Swiss university libraries and some other institutions [<a href="#swissbib">1</a>] with dayly data delta loads. The Swissbib platform merges the received data records from all sources with the data records received in earlier data loads. After that, the platform processes all records into its search engine, where users can search for bibliographic entities. The key step in this merging process is to identify duplicate physical entities out of the original raw data with the goal of combining their records, generating a set of unique records as the basis for indexing in the search engine. Here, duplicate physical entities may have minor differences that are not resolved by Swissbib's deduplication algorithm and need not be copies of identical entities in two different libraries.
-<br><strong>Is this correct : Two same physical entities in different libraries are united in one (?) master-slave record?</strong><br></p>
+<p>Swissbib receives electronic catalogue data of all Swiss university libraries and some other institutions [<a href="#swissbib">1</a>]   <strong>Gue: täglichen vollen data loads würde ich so nicht formulieren
+Ich würde das so verstehen, dass wir den kompletten Bestand - also 30 Mio- jeden Tag neu laden würden. Es werden nur die Daten geladen, die uns von den Sourcen geschickt werden. Das können neue Daten, uploads oder deletes sein</strong>   with dayly full data loads. The Swissbib platform merges the received data from all sources to unique records and processes these into its own search engine, where users can search for bibliographic entities. The key step in this merging process is to identify duplicate entities out of the original raw data records with the goal to combine these, generating a set of unique entities as the basis for indexing in the search engine. &lt;/p&gt;
+    <div>
+    <p><strong>Gue Es sind zwei (oder falls in mehr als Bibliotheken) > 2 Entitäten </strong></p>
+    <p><strong>same (gleichen) ? - ja wenn es tatsächlich genau die gleichen wären und diese gleich katalogosiert worden wären. Also, der Berner und der Basler Bibliothekar kaufen genau das gleiche Bucgh und katalogisieren es gleich. Das wäre für mich der Idealfall</strong></p>
+    <p><strong>Ich würde noch sagen, dass es veilleicht einzelne (kleine) Punkte geben könnte, nach denen ein Buch vielleicht nicht gleich im physischen Sinne ist (was ist eiogentlich der Unterschied zwischen gleich und identisch, müsstest Du als Physiker eigentlich eine Antwort haben)
+    aber nach den von Silvia aufgestellten Regeln als gleich angesehen wird
+    </strong></p>
+
+
+</div>
+    <strong>Is this correct : Two same (?) physical entities in different libraries are united in one master-slave record?</strong></p>
 
 </div>
 </div>
@@ -13171,8 +13181,10 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Swissbib's deduplication mechanism is implemented in an engine written in programming language C and uses a data format called <a href="https://format.gbv.de/pica">pica</a> for configuring this engine, see Data Preparation (CBS) in <a href="#f_basic_data_flow">figure 1</a>. The identification of duplicate records in the raw data is done with the help of a set of predefined attributes. The records to be deduplicated are compared in these attributes with the help of a sophisticated logic. Goal of the capstone project is to replace Swissbib's established deduplication logic with the help of Machine Learning.</p>
+<p>Swissbib's deduplication mechanism is implemented in an engine written in programming language C. The language used for configuring this engine is <a href="http://www.pika-lang.org/">pika</a>.
 
+    The identification of duplicate records in the raw data is done with the help of a set of predefined attributes. The records to be deduplicated are compared in these attributes with the help of a sophisticated logic. Goal of the capstone project is to replace Swissbib's established deduplication logic with the help of Machine Learning.</p>
+    <div><strong>Gue: Nein, Pica ist nicht die Sprache sondern ein Format, wie Marc nur anders strukturiert. Die Infomationen, die mit dem Format ausgedrückt werden sollten aber mehr oder weniger identisch sein. Wenn Bibliothelare etwas besonders gut können, dann ist es Formate erstellen...</strong></div>
 </div>
 </div>
 </div>
@@ -13186,7 +13198,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The Swissbib platform holds records of a total number of more than 31 million distinct entities out of 28 source databases [<a href="#meeting_20191015">2</a>]. The raw data of the sources is deduplicated in a clustering machine <br><strong>Clustering Machine is still wrong, the CBS does the clustering.</strong><br> in order to identify a set of unique entities. The data extract below [<a href="#meeting_20191015">2</a>] illustrates the amount of data being held and processed by the platform. In the data extract shown, a maximum threshold of 17 records per cluster is considered to be reliable [<a href="#meeting_20191015">2</a>].</p>
+    <div><strong>Gue: 31 Millionen ist die Zahl, nach der Deduplizierung. Summe aus Mastersätzen - also diejenigen mit doppelten slaves und uniques, also denen, die als nicht doppelt bertet wurden, "raw Datensätze" aus den Sourcen sind es ungefähr 45 Millionen. Müsste Silvia mal zählen </strong></div>
+<p>The Swissbib platform holds records of a total number of more than 31 million distinct entities out of 28 source databases [<a href="#meeting_20191015">2</a>]. The raw data of the sources is deduplicated in a clustering machine in order to identify a set of unique entities. The data extract below [<a href="#meeting_20191015">2</a>] illustrates the amount of data being held and processed by the platform. In the data extract shown, a maximum threshold of 17 records per cluster is considered to be reliable [<a href="#meeting_20191015">2</a>].</p>
 
 </div>
 </div>
@@ -13453,7 +13466,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The Swissbib platform loads the raw data out of its sources in dayly full loads and stores all records in a <a href="https://en.wikipedia.org/wiki/Sybase">Sybase</a> database, see <a href="#f_basic_data_flow">figure 1</a>. After having loaded all data from its sources, an engine deduplicates the raw data and hands it over to an index which holds the data in a <a href="https://en.wikipedia.org/wiki/Btrfs">b-tree file system</a>. The indexed data is forwarded to an index of the search engine which is available online [<a href="#swissbib">1</a>] for end users to search for catalogue entities.</p>
+<p>The Swissbib platform loads the raw data out of its sources in dayly full loads and stores all records in a <a href="https://en.wikipedia.org/wiki/Sybase">Sybase</a> database, see <a href="#f_basic_data_flow">figure 1</a>. After having loaded all data from its sources, a clustering engine deduplicates the raw data and hands the deduplicated data over to an indexing engine. This step is accomplished with the help of a <a href="https://en.wikipedia.org/wiki/Btrfs">b-tree file system</a>. The indexing engine stores the data records in an index of the search engine which is available online [<a href="#swissbib">1</a>] for end users to search for catalogue entities.</p>
 
 </div>
 </div>
@@ -13471,8 +13484,29 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>With the interface [<a href="#swissbib_sru">3</a>], the Swissbib project offers an API to acces its processed and indexed data. Via this interface, the search engine can be queried to deliver masses of records in .xml or .json format according to the sent service request. The data via [<a href="#swissbib_sru">3</a>] partially underlies open acces according to the <a href="https://en.wikipedia.org/wiki/Creative_Commons_license">Creative Commons license</a> of CC0 [<a href="#cc0">4</a>]. The search engine [<a href="#swissbib_cc0">5</a>] offers access to the fully open data, exclusively.</p>
-<p>Some parts of the data of [<a href="#swissbib_sru">3</a>] is under protection, though, e.g. records enriched with data from <a href="https://www.worldcat.org/">worldcat</a>. This part of the data is not relevant for the project and as the data to be worked with in this capstone project, will be pre-processed (compare orange coloured data path of <a href="#f_basic_data_flow">figure 1</a> and description below), the protected data will be filtered out for the project.</p>
+
+<div><strong>
+
+    Gue:
+    richtig ist, dass sru.swissbib.ch eine API ist, über die wir alle Daten anbieten. Das ist korrekt.
+    Nicht richtig ist, dass alle diese CC0 sind. Jetzt wird es ein wenig komplizierter und ich muss ausholen, sorry.
+    Die Daten sollten eigentlich alle frei sein. Sind sie aber in manchen Fällen nicht. Ein Grund kann sogenannte "Fremdkatalogisierung" sein. Was das heisst: Die Bibliothekarin sitzt an ihrem Bildschirm und katalogisiert ein Buch zur englischen Literatur. Dann sieht sie in einem repository (zum Beispiel worldcat), dass es dort schöne subjects gibt, die sie mitbenutzen möchte. Das System erlaubt ihr dies und schwupps werden die Daten übernommen. Jetzt kann es sein, dass nur diese Daten nicht CC0 sind (oftmals wissen das die Leute gar nicht so recht) und damit ist das ganze Katalogisat nicht mehr CC0. Jetzt haben die Bibliotheken ein Problem: Eigentlich möchten sie CC0 anbieten, wissen aber nicht genau was alles CC= ist.
+
+    swissbib zur Hilfe: im Projekt linked.swissbib.ch haben wir genau dieses Thema adressiert und es gab eine Menge Sitzungen und Diskussionen. Wir haben dann erreicht, dass die Bibliotheken ihre Daten ansehen und die Sätze, bei denen sie glauben, dass sie nicht mehr CC0 sind, einen vermerk machen. Diesen Satz bekommt dann Silvia in ihrer Waschmaschine und schreibt diesen Vermerk aus dem Quellsystem in ein Feld des Marc records. In sru.swissbib.ch bieten wir jedoch alle Daten an (auch die nicht cc0)  ebenso auf www.swissbib.ch. Das machen ja alle Bibliiotheklen auch in ihren Katalogen.
+    Jetzt gehe mal nach data.swissbib.ch und dort auf bibliographic resources und Du wirst sehen, dass wir runf 24 Mio anzeigen. Dort werden die Dokumente herausgefiltert, die den Vermerk von Silvia tragen, dass sie nicht CC0 sind.
+    Was heisst das für uns:
+    a) beim Goldastandard (also den von Silvia aufbereitetem Daten)kannst Du davon ausgehen, dass sie CC0 sind.
+    b) bei den Sätzen aus den beiden grossen files, die ich Dir mit dem scala Programm mit bestimmten features aufbereite, achte ich bis jetzt nicht auf diesen Vermerk. Es ist aber sehr leicht, dies zu tun, dann bekommst Du nur CC0 Sätze (zumidest das, was die Bibliotheken glauben das es so ist, aber ich denke das genügt)
+
+    Zur Frage, wo Du das statement findest? Da muss ich ein wenig suchen, wo wir das abgedruckt haben, möglicherweise nur im Schriftverkehr.
+
+    data.swissbib.ch ist jedoch die Datenschnittstelle für linked open data (LOD) - hier geht man normalerweise davon aus, dass es sich um CC0 Daten handelt. Aber eigentlich müssten wir das auch noch schreiben. Muss ich mich drum kümmern, wenn Du das so explizit brauchst und Dir meine sonstigen Aussagen nicht reichen.
+
+</strong></div>
+<p>With the interface [<a href="#swissbib_sru">3</a>], the Swissbib project offers an API
+<br><strong>Question : Is this correct?</strong><br>
+to acces its processed and indexed data. Via this interface, the search engine can be queried to deliver masses of records in .xml or .json format according to the sent service request. The data underlies open acces according to the <a href="https://en.wikipedia.org/wiki/Creative_Commons_license">Creative Commons license</a> of CC0 [<a href="#cc0">4</a>].<br><strong>Question : Where is this reference to CC0 documented on the Swissbib web site?</strong><br>
+Some parts of the data is under protection, though, cp. [<a href="#swissbib_protected">5</a>]. This part of the data is not relevant for the project and as the data to be worked with in this capstone project, will be pre-processed (compare orange coloured data path of <a href="#f_basic_data_flow">figure 1</a> and description below), the protected data will be filtered out for the project.<br><strong>Question : Can you describe, what kind of data is protected? Can you describe, what kind of "protection" this kind of data underlies?</strong><br></p>
 
 </div>
 </div>
@@ -13604,7 +13638,43 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The project will start with a deep analysis of the initial data with the goal of understanding the data and the relationships in its attributes. In the data preprocessing step, the data will be manipulated and processed with the goal of enhancing the machine learning process. The data comes along with substantial information in form of strings, e.g. in title and person. Besides string manipulations, the data preprocessing step will address handling of missing values and decide on actions to be taken for data cleaning.</p>
+
+<div>
+
+    <p>
+        <strong>
+            Ich glaube, an dieser Stelle sollten wir mal telefonieren, sonst wird es zu kompliziert.
+
+            Zu Deiner Frage, ob Du die precluster ansehen kannst oder wir exporteiren können (so habe ich die Frage zumidest noch im Kopf)
+            ansehen veilleicht ja, aber nur über ein tool der CBS Maschine. Diese "Precluster" (also einfach ein Index) wird ja von der CBS Maschine erstellt - das ist ja einfach eine Datenstruktur.
+
+        </strong>
+    </p>
+
+    <p>
+        <strong>
+
+            exportieren mit hoher Wahrscheinlichkeit nicht, zumindest habe ich das noch nie gehört.
+        </strong>
+
+    </p>
+    <p>
+        <strong>
+
+            Bevor wir dann vieleicht besser telefonieren an dieser Stelle: Der Index ist ja nur ein Hilfsmittel für den CBS eigenen Algorithmus. An dieser Stelle müssen wir uns überlegen, welche Alteernativen wir einsetzen könnten.
+            Dies ist auch der Grund, warum ich bereits sehr viel früher gesagt habe, in Deinem Projekt, sollten wir uns darauf beschränken, dass Du mit sehr kleinen Datenmengen arbeitest (eben der Goldstandard, ok als Trainigsset und dann ein kleines willkürliches Datenset) um zu überprüfen, welche Ergebnisse Deine Algorithmen liefenr können
+        </strong>
+
+
+    </p>
+    <p>
+        <strong>Aber lass uns darüber reden</strong>
+    </p>
+
+
+</div>
+
+<p>The project will start with a deep analysis of the initial data. In the data preprocessing step, the data will be analysed, manipulated and processed with the goal of enhancing the machine learning process. The data comes along with substantial information in form of strings, e.g. in title and person. Besides such string manipulations, the data preprocessing step will assess missing values and decide on actions to be taken for data cleaning.</p>
 
 </div>
 </div>
@@ -13612,8 +13682,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After the data preprocessing step, the indexing of the data is a central step in preparing the data for record pair comparison. During indexing, the full data set is split into blocks that hold similar entities. This splitting is called blocking [<a href="#data_matching">9</a>] and the resulting blocks are called preclusters. The preclusters are the starting point for explicit record comparison in the deduplication process, see <a href="#f_clustering">figure 4</a>. The indexing step is crucial in that a minimal size of the preclusters reduces the processing time of the record pair comparison.</p>
-<p>The indexing and preclustering is done by the Data Preparation (CBS) engine, see <a href="#f_basic_data_flow">figure 1</a>. The Swissbib project team plans to replace this indexing step with a new platform, see section 4c), below. Therefore, the preclustering is outside of the scope of the capstone project.</p>
+<p>After the data preprocessing step, the indexing of the data is a central step in preparing the data for record pair comparison. During indexing, the full data set is split into blocks that hold similar entities. This splitting is called blocking [<a href="#data_matching">9</a>] and the resulting blocks are called preclusters. The preclusters are the starting point for explicit record comparison in the deduplication process, see <a href="#f_clustering">figure 4</a>. The indexing step is crucial in that a minimal size of the preclusters reduces the processing time of the record pair comparison. Machine learning algorithms can be used for identifying the optimal blocking key values [<a href="#data_matching">9</a>], see below.</p>
 
 </div>
 </div>
@@ -13997,6 +14066,10 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+    <div><strong>was heisst EDA - ich merke, ich werde ziemlich müde
+
+    Manuela und ich fahren morgen erneut nach Aeschi, die Mutter von Manuela besuchen. Ich werde, wenn überhaupt also erst am späten Abend Zeit für ein Telefon haben
+    </strong></div>
 <h3 id="(a)-Preliminary-EDA">(a) Preliminary EDA<a class="anchor-link" href="#(a)-Preliminary-EDA">&#182;</a></h3>
 </div>
 </div>
@@ -14057,7 +14130,15 @@ div#notebook {
 <li>The frequency distribution of the values in the attribute should be close to uniform.</li>
 <li>The trade-off between number and size of the resulting blocks is to be decided.</li>
 </ul>
-<p>Due to the plans of Swissbib's project team, see section 4c), the indexing step is outside the scope of the project, cp section 2b).</p>
+<p>A machine learning method will be tested to identify the best blocking keys.<br><strong>Question : Does Swissbib have training data for preclustering? How does Swissbib do preclustering?</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The Swissbib data contains more attributes than the list of features for deduplication [<a href="#feature_deduplication_wiki">8</a>]. The degree of filling and the quality of these additional attributes and potential features is unknown, at the moment. One task might be to identify additional promising features for the goal of the capstone project with the help of the MARC 21 documentation [<a href="#marc21">6</a>]. If such a promising feature can be identified, the Swissbib project team will be asked to add it to their data extract.</p>
 
 </div>
 </div>
@@ -14072,7 +14153,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The Swissbib data contains more attributes than the list of features for deduplication [<a href="#feature_deduplication_wiki">8</a>]. The degree of filling and the quality of these additional attributes and potential features is unknown, at the moment. One task might be to identify additional promising features for the goal of the capstone project with the help of the MARC 21 documentation [<a href="#marc21">6</a>]. If such a promising additional feature can be identified, the Swissbib project team will be asked to add it to their data extract.</p>
+<p>Here, nothing is planned by now. Any decision will be taken situatively.</p>
 
 </div>
 </div>
@@ -14112,7 +14193,8 @@ div#notebook {
 <p>The following machine learning models will be used in the course of the capstone project.</p>
 <ul>
 <li>Principal Component Analysis with the goal to understanding the text string data, see section 3b).</li>
-<li>In [<a href="#padmanaban2012">11</a>], a deduplication method based on an artificial neural network is described. The approach of this reference will be tried to reproduce for the given data.</li>
+<li>The model to be used to find the best blocking keys, see section 3b), is undecided, yet.<br><strong>Problem : It is unclear, whether Swissbib has training data out of preclustering.</strong></li>
+<li>In [<a href="#padmanaban2012">11</a>], a deduplication method based on an artificial neural network is described. The result of this reference will be tried to reproduce for the given data.</li>
 <li>The Python ecosystem offers Dedupe as a library for deduplication with machine learning [<a href="#python_dedupe">12</a>]. The result of the artificial neural network will be compared to the result with this library.</li>
 </ul>
 
@@ -14144,6 +14226,14 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>None.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="&#160;References">&#160;References<a class="anchor-link" href="#&#160;References">&#182;</a></h3>
 </div>
 </div>
@@ -14155,7 +14245,7 @@ div#notebook {
 [2<a id='meeting_20191015'></a>] - Communication by Silvia Witzig, Universität Basel, Universitätsbibliothek, Projekt swissbib, 15.10.2019.<br>
 [3<a id='swissbib_sru'></a>] - <a href="http://sru.swissbib.ch/">http://sru.swissbib.ch/</a>, Interface to Swissbib's online catalogue as <a href="https://en.wikipedia.org/wiki/Search/Retrieve_via_URL">Search/Retrieve via URL</a>.<br>
 [4<a id='cc0'></a>] - <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">https://creativecommons.org/share-your-work/public-domain/cc0/</a>, Creative Commons CC0 license documentation.<br>
-[5<a id='swissbib_cc0'></a>] - <a href="https://data.swissbib.ch/">https://data.swissbib.ch/</a>, Documentation of Swissbib's CC0 open data.<br>
+[5<a id='swissbib_protected'></a>] - <a href="https://data.swissbib.ch/bibliographicResource">https://data.swissbib.ch/bibliographicResource</a>, Documentation of Swissbib's protected data.<br>
 [6<a id='marc21'></a>] - <a href="https://www.loc.gov/marc/bibliographic/">https://www.loc.gov/marc/bibliographic/</a>, MARC 21 format description for bibliographic data, <a href='https://www.loc.gov/librarians/standards'>Library of Congress</a><br>
 [7<a id='scala_repo'></a>] - <a href="https://github.com/guenterh/andreas_cluster_features">https://github.com/guenterh/andreas_cluster_features</a>, Repository to scala code for data extraction.<br>
 [8<a id='feature_deduplication_wiki'></a>] - <a href="http://www.swissbib.org/wiki/index.php?title=Features_Deduplication">http://www.swissbib.org/wiki/index.php?title=Features_Deduplication</a>, Wikipedia site created for documentation of features for deduplication.<br>
