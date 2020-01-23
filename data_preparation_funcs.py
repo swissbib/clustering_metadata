@@ -1,24 +1,5 @@
 """General functions for chapter data preparation"""
 
-def transform_attributes (df, a) :
-    if a in ['volumes']:
-        df = transform_list_to_string(df, a)
-    elif a in ['format']:
-        df = transform_list_to_string(df, a)
-        df = split_format(df)
-    elif a in ['person', 'corporate']:
-        split_dictionary = {'person' : ['100', '700', '800', '245c'], 'corporate' : ['110', '710', '810']}
-        df = split_person_corporate(df, a, split_dictionary)
-    elif a in ['ttlfull']:
-        df = split_ttlfull(df)
-    elif a in ['century', 'edition', '035liste']:
-        # Do nothing
-        return df
-    else:
-        print('AJ ...', a, '... ATTRIUBTE IS MISSING!')
-
-    return df
-
 def transform_list_to_string (df, column) :
     df[column] = [', '.join(map(str, list_element)) for list_element in df[column]]
     df[column] = df[column].str.lower()
@@ -37,19 +18,40 @@ def build_delta_feature (df, attribute, algorithm) :
 
     return df
 
-def split_person_corporate (df, attribute, split_dict) :
-    for ending in split_dict[attribute]:
+def split_dictionary_column (df, attribute, split_columns) :
+    for ending in split_columns:
         df = transform_dictionary_to_list(df, attribute, ending)
         df = transform_list_to_string(df, attribute+'_'+ending)
     df = df.drop(columns=[attribute])
 
     return df
 
-def split_ttlfull (df) :
-    for ending in ['245', '246']:
-        df = transform_dictionary_to_list(df, 'ttlfull', ending)
-        df = transform_list_to_string(df, 'ttlfull_'+ending)
-    df = df.drop(columns=['ttlfull'])
+def clean_exactDate_string (df) :
+    df['exactDate'] = df.exactDate.str.replace('\D', 'u')
+
+    return df
+
+def norm_first_coordinate (df, suffix) :
+    df['coordinate'+suffix] = df['coordinate'+suffix].map(lambda x : x[0] if len(x)>0 else '').str.replace('.', '').str[:8].str.lower()
+
+    return df
+
+def reduce_list_to_north (df) :
+    for i in range(len(df)):
+        if len(df.coordinate_N[i]) > 0:
+            to_be_used = df.coordinate_N[i].copy()
+            while (df.coordinate_N[i][0][0] == 'E') | (df.coordinate_N[i][0][0] == 'W'):
+                df.coordinate_N[i].remove(df.coordinate_N[i][0])
+
+    return df
+
+def split_coordinate (df) :
+    df['coordinate_E'] = df['coordinate']
+    df = norm_first_coordinate(df, '_E')
+    # Recuce list to N and S and then same procedure
+    df['coordinate_N'] = df['coordinate']
+    df = reduce_list_to_north(df)
+    df = norm_first_coordinate(df, '_N')
 
     return df
 

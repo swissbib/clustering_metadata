@@ -13,10 +13,6 @@ def compare_logic (column_dict, column_name) :
         # Strings
         filled = lambda col: col!=''
         empty = lambda col: col==''
-    elif column_name in (column_dict['array_of_strings_columns']):
-        # Array of Strings
-        filled = lambda col: col!=['']
-        empty = lambda col: col==['']
 
     return filled, empty
 
