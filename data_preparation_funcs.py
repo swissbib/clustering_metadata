@@ -1,3 +1,5 @@
+import pandas as pd
+
 """General functions for chapter data preparation"""
 
 def transform_list_to_string (df, column) :
@@ -13,10 +15,38 @@ def transform_dictionary_to_list (df, column, dict_element) :
 
     return df
 
-def build_delta_feature (df, attribute, algorithm) :
-    df[attribute+'_delta'] = df[[attribute+'_x', attribute+'_y']].apply(lambda x : algorithm.normalized_similarity(x[attribute+'_x'], x[attribute+'_y']), axis=1)
+def build_delta_feature (df, attribute, algorithm, metadata_dict) :
+    if attribute in ['doi', 'isbn'] :
+        df[attribute+'_delta'] = df[[attribute+'_x', attribute+'_y']].apply(lambda x : build_delta_isbn(x[attribute+'_x'], x[attribute+'_y'], algorithm), axis=1)
+    else :
+        df[attribute+'_delta'] = df[[attribute+'_x', attribute+'_y']].apply(lambda x : algorithm.normalized_similarity(x[attribute+'_x'], x[attribute+'_y']), axis=1)
 
-    return df
+    metadata_dict['columns_for_comparison'].append(attribute+'_delta')
+
+    return df, metadata_dict
+
+def build_delta_isbn (x_list, y_list, algorithm) :
+    # Dedupe list
+    x_list = list(dict.fromkeys(x_list))
+    y_list = list(dict.fromkeys(y_list))
+
+    if len(x_list) == 0 and len(y_list) == 0 :
+        # Return fix value in case of both lists empty
+        return 1.0
+    else :
+        length_min = min(len(x_list), len(y_list))
+        if length_min == 0 :
+            # Return fix value in case of one list empty
+            return 0.0
+        else : # Both lists hold elements
+            # Initialize similarity sum
+            similarity_sum = 0.0
+            # Calculate sum of similarities for each element
+            for x_element in x_list :
+                for y_element in y_list :
+                    similarity_sum += algorithm.normalized_similarity(x_element, y_element)
+            # Normalize
+            return similarity_sum / length_min
 
 def split_dictionary_column (df, attribute, split_columns) :
     for ending in split_columns:
@@ -32,7 +62,7 @@ def clean_exactDate_string (df) :
     return df
 
 def norm_first_coordinate (df, suffix) :
-    df['coordinate'+suffix] = df['coordinate'+suffix].map(lambda x : x[0] if len(x)>0 else '').str.replace('.', '').str[:8].str.lower()
+    df['coordinate'+suffix] = df['coordinate'+suffix].map(lambda x : x[0] if len(x)>0 else '').str.replace(' ', '').str.replace('.', '').str[:8].str.lower()
 
     return df
 
@@ -62,5 +92,26 @@ def split_format (df) :
     df['format_prefix'][df['format_prefix']==''] = '  '
     df['format_postfix'][df['format_postfix']==''] = '      '
     df = df.drop(columns=['format'])
+
+    return df
+
+def show_samples_interval (df, attrib, lower, upper, no_sample=5) :
+    # If not enough number of samples then take least possible number.
+    no_sample = min(len(df[['duplicates', attrib+'_delta', attrib+'_x', attrib+'_y']][(df[attrib+'_delta'] >= lower) & (df[attrib+'_delta'] <= upper)]), no_sample)
+    display(df[['duplicates', attrib+'_delta', attrib+'_x', attrib+'_y']][(df[attrib+'_delta'] >= lower) & (df[attrib+'_delta'] <= upper)].sample(n=no_sample))
+    print(f'{lower} <= {attrib}_delta <= {upper}')
+
+    return None
+
+def show_samples_distinct (df, attrib, pos_value, no_sample=5) :
+    # If not enough number of samples then take least possible number.
+    no_sample = min(len(df[['duplicates', attrib+'_delta', attrib+'_x', attrib+'_y']][df[attrib+'_delta'] == pos_value]), no_sample)
+    display(df[['duplicates', attrib+'_delta', attrib+'_x', attrib+'_y']][df[attrib+'_delta'] == pos_value].sample(n=no_sample))
+
+    return None
+
+def mark_both_missing (df, attrib, target_value=-1.0) :
+    pd.set_option('mode.chained_assignment', None) # Suppress SettingWithCopyWarning.
+    df[attrib+'_delta'][df[attrib+'_x'].apply(lambda x : len(x) == 0) & df[attrib+'_y'].apply(lambda x : len(x) == 0)] = target_value
 
     return df

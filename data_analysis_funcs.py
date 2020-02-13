@@ -37,21 +37,7 @@ def find_empty_in_column (dataFrame, column_dict, column_name) :
 
     information_filled(dataFrame, column_name, idx_filled, idx_empty)
 
-    return idx_filled, idx_empty
-
-def two_examples (d, filled, empty) :
-    """Print-output of first sample data with empty attribute
-        and of first sample data with filled attribute"""
-
-    if len(empty) > 0:
-        print('\nEMPTY - index', empty[0], '\n')
-        print(d.loc[empty[0]])
-    else:
-        print('\nEMPTY - None')
-    print('\nFILLED - index', filled[0], '\n')
-    print(d.loc[filled[0]])
-
-    return
+    return None
 
 """General functions for appendix chapter Compare Similarities"""
 
