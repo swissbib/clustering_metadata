@@ -1,12 +1,7 @@
 import pandas as pd
+import numpy as np
 
 """General functions for chapter data preparation"""
-
-def transform_list_to_string (df, column) :
-    df[column] = [', '.join(map(str, list_element)) for list_element in df[column]]
-    df[column] = df[column].str.lower()
-
-    return df
 
 def transform_dictionary_to_list (df, column, dict_element) :
     df[column+'_'+dict_element] = [dictionary_pair.get(dict_element) for dictionary_pair in df[column]]
@@ -15,13 +10,60 @@ def transform_dictionary_to_list (df, column, dict_element) :
 
     return df
 
-def build_delta_feature (df, attribute, algorithm, metadata_dict) :
-    if attribute in ['doi', 'isbn'] :
-        df[attribute+'_delta'] = df[[attribute+'_x', attribute+'_y']].apply(lambda x : build_delta_isbn(x[attribute+'_x'], x[attribute+'_y'], algorithm), axis=1)
-    else :
-        df[attribute+'_delta'] = df[[attribute+'_x', attribute+'_y']].apply(lambda x : algorithm.normalized_similarity(x[attribute+'_x'], x[attribute+'_y']), axis=1)
+def transform_list_to_string (df, column) :
+    df[column] = [', '.join(map(str, list_element)) for list_element in df[column]]
+    df[column] = df[column].str.lower()
 
-    metadata_dict['columns_for_comparison'].append(attribute+'_delta')
+    return df
+
+def isolate_doi (x_list) :
+    # Dedupe list
+    x_list = list(dict.fromkeys(x_list))
+
+    for x_element in x_list :
+        # A doi starts with '10.'
+        if x_element.startswith('10.') :
+            # Return first list element starting with '10.'
+            return x_element
+
+    # Return empty string if no doi element has been found
+    return ''
+
+def reduce_to_doi_element (df) :
+    df['doi'] = df['doi'].apply(lambda x : isolate_doi(x))
+
+    return df
+
+def isolate_ismn (x_list) :
+    # Dedupe list
+    x_list = list(dict.fromkeys(x_list))
+
+    for x_element in x_list :
+        # A ismn starts with '979' or 'm'
+        if (x_element.startswith('979') | x_element.lower().startswith('m')) :
+            # Return first list element starting with '10.'
+            return x_element
+
+    # Return empty string if no doi element has been found
+    return ''
+
+def reduce_to_ismn_element (df) :
+    df['ismn'] = df['ismn'].apply(lambda x : isolate_ismn(x))
+
+    return df
+
+def isolate_number_from_string (df, attrib) :
+    df[attrib] = df[attrib].str.extract(r'(\d+)').fillna('')
+
+    return df
+
+def build_delta_feature (df, attrib, algorithm, metadata_dict) :
+    if attrib in ['isbn'] :
+        df[attrib+'_delta'] = df[[attrib+'_x', attrib+'_y']].apply(lambda x : build_delta_isbn(x[attrib+'_x'], x[attrib+'_y'], algorithm), axis=1)
+    else :
+        df[attrib+'_delta'] = df[[attrib+'_x', attrib+'_y']].apply(lambda x : algorithm.normalized_similarity(x[attrib+'_x'], x[attrib+'_y']), axis=1)
+
+    metadata_dict['columns_for_comparison'].append(attrib+'_delta')
 
     return df, metadata_dict
 
@@ -48,11 +90,20 @@ def build_delta_isbn (x_list, y_list, algorithm) :
             # Normalize
             return similarity_sum / length_min
 
-def split_dictionary_column (df, attribute, split_columns) :
+def split_dictionary_column (df, attrib, split_columns) :
     for ending in split_columns:
-        df = transform_dictionary_to_list(df, attribute, ending)
-        df = transform_list_to_string(df, attribute+'_'+ending)
-    df = df.drop(columns=[attribute])
+        df = transform_dictionary_to_list(df, attrib, ending)
+        df = transform_list_to_string(df, attrib+'_'+ending)
+    df = df.drop(columns=[attrib])
+
+    return df
+
+def concatenate_corporate_keys (df):
+    # Initial filling
+    df['corporate_full'] = df['corporate_110']
+    df['corporate_full'] = df[['corporate_full', 'corporate_710']].apply(lambda x : x['corporate_full']+' '+x['corporate_710']
+        if ( (len(x['corporate_full'])>0) & (len(x['corporate_710'])>0) & (x['corporate_full']!=x['corporate_710']) ) else ( x['corporate_710'] if ((len(x['corporate_full'])==0) & (len(x['corporate_710'])>0))
+            else x['corporate_full']), axis=1)
 
     return df
 
@@ -115,3 +166,10 @@ def mark_both_missing (df, attrib, target_value=-1.0) :
     df[attrib+'_delta'][df[attrib+'_x'].apply(lambda x : len(x) == 0) & df[attrib+'_y'].apply(lambda x : len(x) == 0)] = target_value
 
     return df
+
+def determine_similarity_values (df, attrib):
+    attribute_uniques = np.sort(df[attrib+'_delta'].unique())
+    attribute_uniques_len = len(attribute_uniques)
+    print(attrib, 'values range', attribute_uniques)
+
+    return attribute_uniques, attribute_uniques_len
