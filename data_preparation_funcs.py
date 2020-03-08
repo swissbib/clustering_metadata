@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import re as re
 
 """General functions for chapter data preparation"""
 
@@ -10,9 +11,32 @@ def transform_dictionary_to_list (df, column, dict_element) :
 
     return df
 
-def transform_list_to_string (df, column) :
-    df[column] = [', '.join(map(str, list_element)) for list_element in df[column]]
-    df[column] = df[column].str.lower()
+def extract_number_digits_from_string (df, attrib) :
+    df[attrib] = df[attrib].apply(lambda x : re.findall(r'\d+', x))
+    df = transform_list_to_string(df, attrib, ' ')
+
+    return df
+
+def extract_scaling_from_scale (df) :
+    # Only this attriubte is affected
+    attrib = 'scale'
+
+    # The '1: ' shall be removed
+    df[attrib] = df[attrib].apply(lambda x : x.replace('1 ', ''))
+
+    return df
+
+def transform_list_to_string (df, attrib, separator=', ') :
+    df[attrib] = [separator.join(map(str, list_element)) for list_element in df[attrib]]
+    df[attrib] = df[attrib].str.lower()
+
+    return df
+
+def split_dictionary_column (df, attrib, split_columns) :
+    for ending in split_columns:
+        df = transform_dictionary_to_list(df, attrib, ending)
+        df = transform_list_to_string(df, attrib+'_'+ending)
+    df = df.drop(columns=[attrib])
 
     return df
 
@@ -24,15 +48,10 @@ def isolate_doi (x_list) :
         # A doi starts with '10.'
         if x_element.startswith('10.') :
             # Return first list element starting with '10.'
-            return x_element
+            return x_element.lower()
 
     # Return empty string if no doi element has been found
     return ''
-
-def reduce_to_doi_element (df) :
-    df['doi'] = df['doi'].apply(lambda x : isolate_doi(x))
-
-    return df
 
 def isolate_ismn (x_list) :
     # Dedupe list
@@ -42,13 +61,17 @@ def isolate_ismn (x_list) :
         # A ismn starts with '979' or 'm'
         if (x_element.startswith('979') | x_element.lower().startswith('m')) :
             # Return first list element starting with '10.'
-            return x_element
+            return x_element.lower()
 
     # Return empty string if no doi element has been found
     return ''
 
-def reduce_to_ismn_element (df) :
-    df['ismn'] = df['ismn'].apply(lambda x : isolate_ismn(x))
+def reduce_to_attrib_element (df, attrib) :
+    if attrib == 'doi' :
+        apply_function = lambda x : isolate_doi(x)
+    elif attrib == 'ismn' :
+        apply_function = lambda x : isolate_ismn(x)
+    df[attrib] = df[attrib].apply(apply_function)
 
     return df
 
@@ -56,16 +79,6 @@ def isolate_number_from_string (df, attrib) :
     df[attrib] = df[attrib].str.extract(r'(\d+)').fillna('')
 
     return df
-
-def build_delta_feature (df, attrib, algorithm, metadata_dict) :
-    if attrib in ['isbn'] :
-        df[attrib+'_delta'] = df[[attrib+'_x', attrib+'_y']].apply(lambda x : build_delta_isbn(x[attrib+'_x'], x[attrib+'_y'], algorithm), axis=1)
-    else :
-        df[attrib+'_delta'] = df[[attrib+'_x', attrib+'_y']].apply(lambda x : algorithm.normalized_similarity(x[attrib+'_x'], x[attrib+'_y']), axis=1)
-
-    metadata_dict['columns_for_comparison'].append(attrib+'_delta')
-
-    return df, metadata_dict
 
 def build_delta_isbn (x_list, y_list, algorithm) :
     # Dedupe list
@@ -90,13 +103,15 @@ def build_delta_isbn (x_list, y_list, algorithm) :
             # Normalize
             return similarity_sum / length_min
 
-def split_dictionary_column (df, attrib, split_columns) :
-    for ending in split_columns:
-        df = transform_dictionary_to_list(df, attrib, ending)
-        df = transform_list_to_string(df, attrib+'_'+ending)
-    df = df.drop(columns=[attrib])
+def build_delta_feature (df, attrib, algorithm, metadata_dict) :
+    if attrib in ['isbn'] :
+        df[attrib+'_delta'] = df[[attrib+'_x', attrib+'_y']].apply(lambda x : build_delta_isbn(x[attrib+'_x'], x[attrib+'_y'], algorithm), axis=1)
+    else :
+        df[attrib+'_delta'] = df[[attrib+'_x', attrib+'_y']].apply(lambda x : algorithm.normalized_similarity(x[attrib+'_x'], x[attrib+'_y']), axis=1)
 
-    return df
+    metadata_dict['features'].append(attrib+'_delta')
+
+    return df, metadata_dict
 
 def concatenate_corporate_keys (df):
     # Initial filling
@@ -146,6 +161,54 @@ def split_format (df) :
 
     return df
 
+# Full preprocessing of all attributes of Swissbib's goldstandard
+def attribute_preprocessing(df, columns, strip_digits) :
+    for attrib in columns:
+        if attrib in ['isbn' # Take as is
+                      , 'coordinate_N' # See 'coordinate_E'
+                      , 'format_postfix' # See 'format_prefix'
+                      , 'person_100', 'person_700' # See 'person_245c'
+                      , 'ttlfull_246' # See 'ttlfull_245'
+                     ]:
+            continue # Explicitly : do nothing!
+        elif attrib in ['coordinate_E']:
+            df = split_coordinate(df)
+        elif attrib in ['corporate_full']:
+            df = split_dictionary_column(df, 'corporate', ['110', '710'#, '810
+            ])
+            df = concatenate_corporate_keys(df)
+        elif attrib in ['doi', 'ismn']:
+            df = reduce_to_attrib_element(df, attrib)
+        elif attrib in ['edition', 'musicid']:
+            df = isolate_number_from_string(df, attrib)
+        elif attrib in ['exactDate']:
+            df = clean_exactDate_string(df)
+        elif attrib in ['format_prefix']:
+            df = transform_list_to_string(df, 'format')
+            df = split_format(df)
+        elif attrib in ['person_245c']:
+            df = split_dictionary_column(
+                df, 'person', ['100', '700', #'800',
+                    '245c']
+            )
+        elif attrib in ['scale'] and strip_digits :
+            # Remove non-number digits
+            df = extract_number_digits_from_string(df, attrib)
+            # Remove '1: ' parts
+            df = extract_scaling_from_scale(df)
+        elif attrib in ['ttlfull_245']:
+            df = split_dictionary_column(
+                df, 'ttlfull', ['245', '246']
+            )
+        elif attrib in ['part', 'pubinit', 'volumes']:
+            df = transform_list_to_string(df, attrib)
+            if attrib in ['part', 'volumes'] and strip_digits:
+                df = extract_number_digits_from_string(df, attrib)
+        else: # Not explicitly handled, yet
+            print('Attribute', attrib, 'is missing in this processing step!')
+
+    return df
+
 def show_samples_interval (df, attrib, lower, upper, no_sample=5) :
     # If not enough number of samples then take least possible number.
     no_sample = min(len(df[['duplicates', attrib+'_delta', attrib+'_x', attrib+'_y']][(df[attrib+'_delta'] >= lower) & (df[attrib+'_delta'] <= upper)]), no_sample)
@@ -161,9 +224,29 @@ def show_samples_distinct (df, attrib, pos_value, no_sample=5) :
 
     return None
 
-def mark_both_missing (df, attrib, target_value=-1.0) :
+def mark_both_missing (df, attrib, target_value) :
     pd.set_option('mode.chained_assignment', None) # Suppress SettingWithCopyWarning.
     df[attrib+'_delta'][df[attrib+'_x'].apply(lambda x : len(x) == 0) & df[attrib+'_y'].apply(lambda x : len(x) == 0)] = target_value
+
+    return df
+
+def mark_one_missing (df, attrib, target_value) :
+    pd.set_option('mode.chained_assignment', None) # Suppress SettingWithCopyWarning.
+    # XOR on one single attribute is empty
+    df[attrib+'_delta'][df[attrib+'_x'].apply(lambda x : len(x) == 0) ^ df[attrib+'_y'].apply(lambda x : len(x) == 0)] = target_value
+
+    return df
+
+def mark_missing (df, attrib, fctr, one_or_two='all') :
+    value_ob_missing = [-0.5*fctr, -1.0*fctr]
+
+    if one_or_two == 'all' :
+        df = mark_both_missing(df, attrib, value_ob_missing[1])
+        df = mark_one_missing(df, attrib, value_ob_missing[0])
+    elif one_or_two == 'both' :
+        df = mark_both_missing(df, attrib, value_ob_missing[1])
+    elif one_or_two == 'one' :
+        df = mark_one_missing(df, attrib, value_ob_missing[0])
 
     return df
 
