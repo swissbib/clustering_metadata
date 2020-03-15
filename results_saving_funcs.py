@@ -3,9 +3,9 @@ import os
 import pickle as pk
 import pandas as pd
 import numpy as np
+import nbformat
 from sklearn.dummy import DummyClassifier
 import sklearn.metrics as me
-import matplotlib.pyplot as plt
 
 # Restore results so far
 def restore_dict_results (path_goldstandard, load_file) :
@@ -19,6 +19,22 @@ def save_dict_results (results_dict, path_goldstandard, dump_file) :
     # Binary intermediary metadata file
     with open(os.path.join(path_goldstandard, dump_file), 'wb') as df_output_file:
         pk.dump(results_dict, df_output_file)
+
+    return None
+
+# Save notebook on disc
+def save_notebook_results (notebook, path_results, dict_dump_file_name) :
+    # Build notebook file name first
+    notebook_name = dict_dump_file_name['notebook_name'][:-6]
+    for k in dict_dump_file_name.keys():
+        if k != 'notebook_name':
+            notebook_name = notebook_name + '_' + k + str(dict_dump_file_name[k])
+    # File suffix still
+    notebook_name = notebook_name + '.ipynb'
+
+    # Notebook to file
+    with open(os.path.join(path_results, notebook_name), 'wt') as f:
+        nbformat.write(notebook, f)
 
     return None
 
@@ -78,22 +94,3 @@ def add_result_to_results (path_goldstandard, validation_scores, model, X, y, y_
     results_dictionary['results_model_scores'][get_model_name(model)+suffix] = pd.DataFrame(validation_scores)
 
     return save_dict_results(results_dictionary, path_goldstandard, filename)
-
-# Plotting function for Grid Search results : training data
-def plot_accuracy (param_dict, scores, accuracy_data) :
-    if accuracy_data[-3:] == '_tr':
-        colors = {'gini' : 'orange', 'entropy' : 'brown'}
-        mfc_colors = {'gini' : 'pink', 'entropy' : 'black'}
-        label_end = 'train'
-    else :
-        colors = {'gini' : 'green', 'entropy' : 'blue'}
-        mfc_colors = {'gini' : 'yellow', 'entropy' : 'red'}
-        label_end = 'validation'
-
-    for i in param_dict['criterion']:
-        # Train data plot
-        plt.plot(param_dict['max_depth'][:-1], [acc[accuracy_data] for acc in scores if acc['criterion'] == i][:-1], c=colors[i], marker='o', mfc=mfc_colors[i], mec=colors[i],
-                 label=f'measure = {i}, {label_end}')
-    plt.xlabel('tree depth')
-
-    return plt

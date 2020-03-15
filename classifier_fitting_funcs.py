@@ -26,7 +26,11 @@ def fit_model_measure_scores (model, param_dict, X_tr, y_tr, X_te, y_te) :
     # Save accuracy on train set and validation set
     param_dict['accuracy_tr'] = model.score(X_tr, y_tr)
     param_dict['accuracy_val'] = model.score(X_te, y_te)
-    param_dict['log_accuracy_tr'] = -np.log(1-model.score(X_tr, y_tr))
+    if (1-model.score(X_tr, y_tr)) == 0:
+        # If model reaches 100% accuracy on train data set
+        param_dict['log_accuracy_tr'] = -np.inf
+    else:
+        param_dict['log_accuracy_tr'] = -np.log(1-model.score(X_tr, y_tr))
     param_dict['log_accuracy_val'] = -np.log(1-model.score(X_te, y_te))
 
     print(' => validation score {:.3f}%'.format(100*param_dict['accuracy_val']))
