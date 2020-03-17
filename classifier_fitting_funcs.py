@@ -23,7 +23,9 @@ def fit_model_measure_scores (model, param_dict, X_tr, y_tr, X_te, y_te) :
     # Fit classifier
     model.fit(X_tr, y_tr)
 
-    # Save accuracy on train set and validation set
+    # Save accuracy on train set and validation set : models have only .score() function ...
+    #  ... and no .accuracy_score() function, which is callable with the sklearn.metrics library.
+    #  They return the same result, though.
     param_dict['accuracy_tr'] = model.score(X_tr, y_tr)
     param_dict['accuracy_val'] = model.score(X_te, y_te)
     if (1-model.score(X_tr, y_tr)) == 0:

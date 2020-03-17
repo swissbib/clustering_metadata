@@ -49,12 +49,14 @@ def get_model_name (model) :
 def generate_model_score_df (model, X, y, y_pred, suffix) :
     df = pd.DataFrame.from_dict({
         'model': get_model_name(model)+suffix,
-        'test_score' : [model.score(X, y) if get_model_name(model) != 'Neural Network' else me.accuracy_score(y, y_pred)],
+        # The model.score() is the same as model's .accuracy_score()
+#        'test_score' : [model.score(X, y) if get_model_name(model) != 'Neural Network' else me.accuracy_score(y, y_pred)],
         'auc' : [100*me.roc_auc_score(y, y_pred)],
         'accuracy' : [100*me.accuracy_score(y, y_pred)],
         'precision' : [100*me.precision_score(y, y_pred)],
         'recall' : [100*me.recall_score(y, y_pred)],
-        'test_score_log' : [-np.log(1-model.score(X, y)) if get_model_name(model) != 'Neural Network' else -np.log(1-me.accuracy_score(y, y_pred))],
+        # The model.score() is the same as model's .accuracy_score()
+#        'test_score_log' : [-np.log(1-model.score(X, y)) if get_model_name(model) != 'Neural Network' else -np.log(1-me.accuracy_score(y, y_pred))],
         'auc_log' : [-np.log(1-me.roc_auc_score(y, y_pred))],
         'accuracy_log' : [-np.log(1-me.accuracy_score(y, y_pred))],
         'precision_log' : [-np.log(1-me.precision_score(y, y_pred))],
