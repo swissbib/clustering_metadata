@@ -8,8 +8,8 @@ from sklearn.dummy import DummyClassifier
 import sklearn.metrics as me
 
 # Restore results so far
-def restore_dict_results (path_goldstandard, load_file) :
-    with open(os.path.join(path_goldstandard, load_file), 'rb') as handle:
+def restore_dict_results (path, load_file) :
+    with open(os.path.join(path, load_file), 'rb') as handle:
         results_dict = pk.load(handle)
 
     return results_dict
@@ -66,11 +66,11 @@ def generate_model_score_df (model, X, y, y_pred, suffix) :
     return df
 
 # Store wrongly predicted rows
-def add_wrong_predictions(path_goldstandard, model, coma_quadrant, df, suffix='') :
+def add_wrong_predictions(path, model, coma_quadrant, df, suffix='') :
     filename = 'wrong_predictions.pkl'
 
-    if os.path.exists(os.path.join(path_goldstandard, filename)) :
-        wrong_predictions = restore_dict_results(path_goldstandard, filename)
+    if os.path.exists(os.path.join(path, filename)) :
+        wrong_predictions = restore_dict_results(path, filename)
         if get_model_name(model)+suffix not in wrong_predictions.keys() :
             # Initialize empty dictionary
             wrong_predictions[get_model_name(model)+suffix] = {}
@@ -78,10 +78,10 @@ def add_wrong_predictions(path_goldstandard, model, coma_quadrant, df, suffix=''
     else :
         wrong_predictions = {get_model_name(model)+suffix : {coma_quadrant : df}}
 
-    return save_dict_results(wrong_predictions, path_goldstandard, filename)
+    return save_dict_results(wrong_predictions, path, filename)
 
 # Store results of model
-def add_result_to_results (path_goldstandard, validation_scores, model, X, y, y_pred, suffix='') :
+def add_result_to_results (path, validation_scores, model, X, y, y_pred, suffix='') :
     filename = 'results.pkl'
 
     if isinstance(model, DummyClassifier) :
@@ -89,10 +89,10 @@ def add_result_to_results (path_goldstandard, validation_scores, model, X, y, y_
         results_dictionary = {'results_best_model' : pd.DataFrame(), 'results_model_scores' : {}}
     else :
         # Restore results so far
-        results_dictionary = restore_dict_results(path_goldstandard, filename)
+        results_dictionary = restore_dict_results(path, filename)
 
     # Add results of model
     results_dictionary['results_best_model'] = results_dictionary['results_best_model'].append(generate_model_score_df(model, X, y, y_pred, suffix), sort=False)
     results_dictionary['results_model_scores'][get_model_name(model)+suffix] = pd.DataFrame(validation_scores)
 
-    return save_dict_results(results_dictionary, path_goldstandard, filename)
+    return save_dict_results(results_dictionary, path, filename)
