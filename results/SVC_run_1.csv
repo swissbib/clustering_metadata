@@ -1,0 +1,2 @@
+C,class_weight,degree,gamma,kernel,accuracy_tr,accuracy_val,log_accuracy_tr,log_accuracy_val
+0.5,,3,2.0,poly,0.9997470382393862,0.9990363535618781,8.282272224478923,6.944786096062378

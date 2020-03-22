@@ -4,6 +4,8 @@ import pickle as pk
 import pandas as pd
 import numpy as np
 import nbformat
+from nbconvert.preprocessors import ExecutePreprocessor
+import nbparameterise as nbp
 from sklearn.dummy import DummyClassifier
 import sklearn.metrics as me
 
@@ -15,25 +17,17 @@ def restore_dict_results (path, load_file) :
     return results_dict
 
 # Save full DataFrame into pickle file
-def save_dict_results (results_dict, path_goldstandard, dump_file) :
+def save_dict_results (results_dict, path, dump_file) :
     # Binary intermediary metadata file
-    with open(os.path.join(path_goldstandard, dump_file), 'wb') as df_output_file:
+    with open(os.path.join(path, dump_file), 'wb') as df_output_file:
         pk.dump(results_dict, df_output_file)
 
     return None
 
 # Save notebook on disc
-def save_notebook_results (notebook, path_results, dict_dump_file_name) :
-    # Build notebook file name first
-    notebook_name = dict_dump_file_name['notebook_name'][:-6]
-    for k in dict_dump_file_name.keys():
-        if k != 'notebook_name':
-            notebook_name = notebook_name + '_' + k + str(dict_dump_file_name[k])
-    # File suffix still
-    notebook_name = notebook_name + '.ipynb'
-
+def save_notebook_results (notebook, path, file_name) :
     # Notebook to file
-    with open(os.path.join(path_results, notebook_name), 'wt') as f:
+    with open(os.path.join(path, file_name), 'wt') as f:
         nbformat.write(notebook, f)
 
     return None
@@ -84,7 +78,7 @@ def add_wrong_predictions(path, model, coma_quadrant, df, suffix='') :
 def add_result_to_results (path, validation_scores, model, X, y, y_pred, suffix='') :
     filename = 'results.pkl'
 
-    if isinstance(model, DummyClassifier) :
+    if isinstance(model, DummyClassifier) or not os.path.exists(os.path.join(path, filename)):
         # Baseline as first model
         results_dictionary = {'results_best_model' : pd.DataFrame(), 'results_model_scores' : {}}
     else :
@@ -96,3 +90,31 @@ def add_result_to_results (path, validation_scores, model, X, y, y_pred, suffix=
     results_dictionary['results_model_scores'][get_model_name(model)+suffix] = pd.DataFrame(validation_scores)
 
     return save_dict_results(results_dictionary, path, filename)
+
+def run_notebooks(notebook_list, runtime_param_dict_list, run, path) :
+    for i in range(len(notebook_list)):
+        print('Executing notebook', notebook_list[i])
+        with open(notebook_list[i]) as ntbk:
+            nb = nbformat.read(ntbk, as_version=4)
+
+            # Get list of parameter objects
+            orig_parameters = nbp.extract_parameters(nb)
+            # Update parameters
+            params = nbp.parameter_values(orig_parameters,
+                                          execution_mode=runtime_param_dict_list[run]['em'],
+                                          oversampling=runtime_param_dict_list[run]['os'],
+                                          modification_ratio = runtime_param_dict_list[run]['mr'],
+                                          factor=runtime_param_dict_list[run]['fa'],
+                                          exactDate_mode = runtime_param_dict_list[run]['me'],
+                                          strip_number_digits = runtime_param_dict_list[run]['sn']
+                                         )
+            # Make notebook object with these definitions, ...
+            nb = nbp.replace_definitions(nb, params, execute=False)
+
+            ep = ExecutePreprocessor(timeout=None)
+            # ... and execute it.
+            ep.preprocess(nb, {"metadata": {"path": './'}})
+        # Save notebook run in result file
+        save_notebook_results(nb, path, notebook_list[i][:-6] + '_run_' + str(run) + '.ipynb')
+
+    return None
