@@ -1,0 +1,335 @@
+Run Date,Description,Model,roc auc,accuracy,precision,recall
+,,,,,,
+11.02.2020,"proposal
+commit 4aaf68d92d0e4aeda684ba270adf24047565aecf
+Not fully implemented, yet",DecisionTreeClassifier,98.793309,99.946306,93.203883,97.627119
+,,SVC,85.059674,99.781387,88.841202,70.169492
+,,DummyClassifier,49.898528,98.897348,0.354610,0.338983
+,,NeuralNetwork,96.779661,96.779661,94.805195,98.983051
+,,NeuralNetwork,87.879296,91.733639,99.555556,75.932203
+,,NeuralNetwork,98.135593,98.135593,97.333333,98.983051
+,,,,,,
+18.02.2020,"proposal
+commit 4d6c22c0de8e211128b2ee029819629abcc54150
+Not finally implemented, yet",DecisionTreeClassifier,94.211252,99.883023,90.625000,88.474576
+,,RandomForestClassifier,94.211252,99.883023,90.625000,88.474576
+,,SVC,88.116308,99.827411,91.836735,76.271186
+,,DummyClassifier,49.898528,98.897348,0.354610,0.338983
+,,NeuralNetwork,93.898305,93.898305,90.342679,98.305085
+,,NeuralNetwork,93.050847,93.050847,90.189873,96.610169
+,,NeuralNetwork,95.572622,96.440873,96.478873,92.881356
+,,,,,,
+22.02.2020,"proposal
+commit 445db0dbdb0f300e358ebd4ee225213c89dc7b85
+Grid search NN",DecisionTreeClassifier,98.288692,99.948223,94.370861,96.610169
+,,SVC,96.591848,99.925211,93.537415,93.220339
+,,DummyClassifier,49.898528,98.897348,0.354610,0.338983
+,,NeuralNetwork,94.745763,94.745763,93.137255,96.610169
+,,NeuralNetwork,94.406780,94.406780,92.532468,96.610169
+,,NeuralNetwork,61.608110,73.938002,98.571429,23.389831
+,,,,,,
+28.02.2020,"proposal
+commit 166f2a468ea8579f2fff2ee1fdf4c5d163c744fe
+volumes numbers extracted",RandomForestClassifier,99.655231,99.984659,97.993311,99.322034
+,,DecisionTreeClassifier,99.649446,99.973153,96.065574,99.322034
+,,SVC,98.448541,99.930964,91.373802,96.949153
+,,Neural Network,93.717242,99.906035,95.555556,87.457627
+,,DummyClassifier,49.898528,98.897348,0.354610,0.338983
+,,,,,,
+04.03.2020,"proposal
+commit f9055cd8e083470a8b8268e1c4434e0ae2071afb
+exec_mode = full
+fact = 0.01
+oversamp = 0
+mode_exactDate = added_u
+strip_number = True",RandomForestClassifier,98.638282,99.973153,97.952218,97.288136
+,,DecisionTreeClassifier,98.799095,99.957812,95.049505,97.627119
+,,DecisionTreeClassifier_CV,99.304677,99.957812,94.174757,98.644068
+,,SVC_CV,95.409265,99.919458,94.699647,90.847458
+,,SVC,95.237844,99.913705,94.014085,90.508475
+,,NeuralNetwork,95.065460,99.906035,93.006993,90.169492
+,,,,,,
+05.03.2020,"proposal
+commit 1e936289a3e05136ca8296cfe6a08d411827c215
+exec_mode = full
+fact = 0.1
+oversamp = 0
+mode_exactDate = added_u
+strip_number = True",RandomForestClassifier,98.638282,99.973153,97.952218,97.288136
+,,DecisionTreeClassifier,98.799095,99.957812,95.049505,97.627119
+,,DecisionTreeClassifier_CV,99.304677,99.957812,94.174757,98.644068
+,,SVC_CV,96.931795,99.930964,93.898305,93.898305
+,,SVC,95.745355,99.917541,93.750000,91.525424
+,,NeuralNetwork,93.376331,99.898364,94.814815,86.779661
+,,,,,,
+Comment,The data preparation in chapter 2 has been finalised by 07.03.2020. Only runs after that date are considered on this sheet.,,,,,
+,,,,,,
+08.03.2020,"proposal
+commit 98bda129d9b0687038f433032c9c7e34cd6de08c
+exec_mode = full
+fact = 0.1
+oversamp = 0
+mode_exactDate = xor
+strip_number = True",RandomForestClassifier,97.109966,99.950141,99.950141,96.864111
+,,DecisionTreeClassifier_CV,97.440270,99.936717,99.936717,93.959732
+,,SVC_CV,96.929867,99.927129,99.927129,93.265993
+,,DecisionTreeClassifier,97.434484,99.925211,99.925211,92.105263
+,,SVC,95.400586,99.902200,99.902200,91.780822
+,,,,,,
+19.03.2020,"project
+commit 5269da63be6cf550634efae810c1d80374b864b1
+exec_mode = full
+fact = 0.1
+oversamp = 0
+mode_exactDate = xor
+strip_number = True",DecisionTreeClassifier_CV,98.460039,99.953745,95.016611,96.949153
+,,RandomForestClassifier,97.781104,99.944108,94.630872,95.593220
+,,DecisionTreeClassifier,97.768504,99.919053,90.675241,95.593220
+,,Neural Network,97.263907,99.920981,91.776316,94.576271
+,,SVC,96.248896,99.913271,92.229730,92.542373
+,,SVC_CV,95.901190,99.892071,89.438944,91.864407
+,,,,,,
+21.03.2020,"project
+commit 749955a332816c0a5b316932aff60609fd298e2e
+exec_mode = restricted
+fact = 1.0
+oversamp = 0
+mode_exactDate = added_u
+strip_number = False",DecisionTreeClassifier_CV,98.285702,99.942181,93.442623,96.610169
+,,RandomForestClassifier,98.114272,99.936399,92.810458,96.271186
+,,DecisionTreeClassifier,97.434367,99.924835,92.105263,94.915254
+,,NeuralNetwork,97.262937,99.919053,91.475410,94.576271
+,,SVC_CV,96.757370,99.919053,92.307692,93.559322
+,,SVC,94.720565,99.890144,91.034483,89.491525
+,,,,,,
+22.3.2020,"project
+commit 7726770b391ab60d1c2fe6f61654f9ae345a2771
+exec_mode = restricted
+fact = 1.0
+oversamp = 0
+mode_exactDate = added_u
+strip_number = True",DecisionTreeClassifier_CV,98.288609,99.947963,94.370861,96.610169
+,,DecisionTreeClassifier,98.118148,99.944108,94.039735,96.271186
+,,RandomForestClassifier,97.951564,99.947963,94.966443,95.932203
+,,NeuralNetwork,97.438244,99.932544,93.333333,94.915254
+,,SVC_CV,96.919109,99.905562,89.935065,93.898305
+,,SVC,95.560269,99.884362,88.778878,91.186441
+,,,,,,
+26.3.2020,"project
+commit 407cd7881e41a2bdc78749b8709f6c1a204dbb52
+exec_mode = full
+fact = 1.0
+oversamp = 0
+mode_exactDate = added_u
+strip_number = True",DecisionTreeClassifier_CV,98.116210,99.940254,93.421053,96.271186
+,,RandomForestClassifier,97.950595,99.946036,94.648829,95.932203
+,,DecisionTreeClassifier,97.768504,99.919053,90.675241,95.593220
+,,NeuralNetwork,95.572868,99.909417,92.758621,91.186441
+,,SVC_CV,95.059548,99.893998,91.095890,90.169492
+,,SVC,93.530247,99.868943,89.547038,87.118644
+,"exec_mode = restricted
+fact = 1.0
+oversamp = 0
+mode_exactDate = xor
+strip_number = False",DecisionTreeClassifier_CV,98.285702,99.942181,93.442623,96.610169
+,,RandomForestClassifier,98.114272,99.936399,92.810458,96.271186
+,,DecisionTreeClassifier,97.434367,99.924835,92.105263,94.915254
+,,SVC_CV,96.757370,99.919053,92.307692,93.559322
+,,SVC,94.720565,99.890144,91.034483,89.491525
+,,NeuralNetwork,93.709430,99.890144,92.805755,87.457627
+,"exec_mode = restricted
+fact = 0.1
+oversamp = 0
+mode_exactDate = added_u
+strip_number = True",DecisionTreeClassifier_CV,98.287640,99.946036,94.059406,96.610169
+,,DecisionTreeClassifier,98.118148,99.944108,94.039735,96.271186
+,,RandomForestClassifier,97.951564,99.947963,94.966443,95.932203
+,,NeuralNetwork,96.585940,99.913271,91.666667,93.220339
+,,SVC_CV,95.731699,99.890144,89.403974,91.525424
+,,SVC,95.059548,99.893998,91.095890,90.169492
+,,,,,,
+27.03.2020,"project
+commit 1afda2531cdb277b921fc8e0fb1b7029168072cd
+exec_mode = restricted
+fact = 1.0
+oversamp = 0
+mode_exactDate = xor
+strip_number = False",DecisionTreeClassifier_CV,98.451316,99.936399,92.258065,96.949153
+,,RandomForestClassifier,97.776258,99.934472,93.069307,95.593220
+,,NeuralNetwork,97.097323,99.924835,92.666667,94.237288
+,,DecisionTreeClassifier,97.092477,99.915199,91.147541,94.237288
+,,SVC_CV,95.740421,99.907489,92.150171,91.525424
+,,SVC,94.552042,99.890144,91.319444,89.152542
+,"exec_mode = restricted
+fact = 0.1
+oversamp = 0
+mode_exactDate = added_u
+strip_number = True",DecisionTreeClassifier_CV,98.116210,99.940254,93.421053,96.271186
+,,RandomForestClassifier,97.950595,99.946036,94.648829,95.932203
+,,DecisionTreeClassifier,97.768504,99.919053,90.675241,95.593220
+,,Neural Network,96.747679,99.899780,89.320388,93.559322
+,,SVC_CV,95.733637,99.893998,90.000000,91.525424
+,,SVC,94.885210,99.882435,89.527027,89.830508
+,,,,,,
+28.03.2020,"project
+commit b243cb812cd7f578c3c2fdbba09ef37b7427535d
+exec_mode = full
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 0.4
+mode_exactDate = added_u
+strip_number = True",DecisionTreeClassifier_CV,97.762689,99.871005,95.270270,95.593220
+,,RandomForestClassifier,97.268752,99.885338,97.212544,94.576271
+,,SVC_CV,97.072608,99.828006,93.602694,94.237288
+,,DecisionTreeClassifier,96.927346,99.871005,96.853147,93.898305
+,,SVC,96.225150,99.804118,93.493151,92.542373
+,,NeuralNetwork,92.869241,99.775453,98.062016,85.762712
+,"exec_mode = restricted
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 0.4
+mode_exactDate = xor
+strip_number = False",DecisionTreeClassifier_CV,98.610146,99.894893,95.348837,97.288136
+,,RandomForestClassifier,97.096838,99.875782,96.864111,94.237288
+,,DecisionTreeClassifier,96.905539,99.828006,93.898305,93.898305
+,,SVC_CV,96.215459,99.785008,92.229730,92.542373
+,,NeuralNetwork,95.736059,99.828006,96.085409,91.525424
+,,SVC,95.200932,99.761120,92.387543,90.508475
+,"exec_mode = restricted
+fact = 0.1
+oversamp = 0
+sampling_fraction_reb = 0.4
+mode_exactDate = added_u
+strip_number = True",DecisionTreeClassifier_CV,97.762689,99.871005,95.270270,95.593220
+,,RandomForestClassifier,97.607735,99.894893,97.231834,95.254237
+,,DecisionTreeClassifier,96.581094,99.847117,95.818815,93.220339
+,,NeuralNetwork,96.406757,99.832784,95.138889,92.881356
+,,SVC,96.067774,99.823229,95.104895,92.203390
+,,SVC_CV,95.898282,99.818451,95.087719,91.864407
+,"exec_mode = full
+fact = 1.0
+oversamp = 20
+modification_ratio = 0.2
+sampling_fraction_reb = 0.4
+mode_exactDate = added_u
+strip_number = True",RandomForestClassifier,99.924360,99.917811,99.836407,99.955331
+,,DecisionTreeClassifier_CV,99.889559,99.891394,99.843715,99.880881
+,,NeuralNetwork,99.887312,99.885523,99.814030,99.895771
+,,SVC_CV,99.882466,99.879652,99.799182,99.895771
+,,DecisionTreeClassifier,99.846541,99.850299,99.791620,99.828767
+,,SVC,99.838149,99.838558,99.754519,99.836212
+,"exec_mode = tune
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 0.4
+mode_exactDate = added_u
+strip_number = True",DecisionTreeClassifier_CV,97.762689,99.871005,95.270270,95.593220
+,,RandomForestClassifier,97.101683,99.885338,97.543860,94.237288
+,,DecisionTreeClassifier,97.070185,99.823229,93.288591,94.237288
+,,SVC_CV,96.556865,99.799341,92.592593,93.220339
+,,NeuralNetwork,95.905551,99.832784,96.099291,91.864407
+,,SVC,95.883744,99.789785,93.127148,91.864407
+,,,,,,
+30.03.2020,"project
+commit 347d371e3816cf950120a1050f1fd3294b30ce30
+exec_mode = tune
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 1
+mode_exactDate = added_u
+strip_number = True",RandomForestClassifier,97.951564,99.947963,94.966443,95.932203
+,,DecisionTreeClassifier_CV,98.116210,99.940254,93.421053,96.271186
+,,DecisionTreeClassifier,97.272629,99.938326,94.576271,94.576271
+,"project
+commit 25ff4a5508616d4f6da0b650c77acc7685c33af6
+exec_mode = tune
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 1
+mode_exactDate = added_u
+strip_number = True",SVC_CV,96.245019,99.905562,91.000000,92.542373
+31.03.2020,"project
+commit e8502fbc56da0d3cab5e19b022104d20dceefad9
+same as above, different grid parameters",SVC_CV,96.245019,99.905562,91.000000,92.542373
+,"project
+commit c26454cf6838a354dbf42017b5c5a86346358add
+same as above, different grid parameters",SVC_CV,95.568022,99.899780,91.186441,91.186441
+,"project
+commit 96312ff1113491d7201aff2ce0717359575cd814
+same as above, different grid parameters",SVC_CV,95.907005,99.903635,91.245791,91.864407
+,"project
+commit 035ba69a736115a495ae31455f207fb1d377c620
+same as above, different grid parameters",SVC_CV,95.907005,99.903635,91.245791,91.864407
+01.04.2020,"project
+commit 29ff12700694247688341a07c9d4c924863fdbfe
+exec_mode = tune
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 1
+mode_exactDate = added_u
+strip_number = True",NeuralNetwork,98.613055,99.922908,89.968652,97.288136
+,"project
+commit 1ef2cb46b9c160f86577a4131c777936a6ef0e0f
+same run with same parameter grid as above",NeuralNetwork,97.59126,99.901708,88.36478,95.254237
+,"project
+commit 2efb00b473633607b7c56a670a27e3cee135de42
+same as above, different grid parameters",NeuralNetwork,98.444532,99.922908,90.22082,96.949153
+,,,,,,
+04.04.2020,"project
+commit 01c781c7bce426788ed02b6f9edec3a76b5be1f5
+exec_mode = full
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 0.1
+mode_exactDate = added_u
+strip_number = True",RandomForestClassifier,99.394607,99.761643,96.688742,98.983051
+,,DecisionTreeClassifier,99.045933,99.706637,96.345515,98.305085
+,,DecisionTreeClassifier_CV,99.045933,99.706637,96.345515,98.305085
+,,SVC_CV,98.377658,99.651632,96.621622,96.949153
+,,SVC,97.878875,99.614961,96.917808,95.932203
+,,NeuralNetwork,99.617289,99.578291,93.037975,99.661017
+,"exec_mode = restricted
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 0.1
+mode_exactDate = xor
+strip_number = False",RandomForestClassifier,99.075008,99.761643,97.315436,98.305085
+,,DecisionTreeClassifier_CV,99.007165,99.633297,95.081967,98.305085
+,,DecisionTreeClassifier,98.358275,99.614961,95.973154,96.949153
+,,NeuralNetwork,98.677874,99.614961,95.364238,97.627119
+,,SVC_CV,97.830416,99.523286,95.286195,95.932203
+,,SVC,96.614900,99.339934,94.197952,93.559322
+,"exec_mode = restricted
+fact = 0.1
+oversamp = 0
+sampling_fraction_reb = 0.1
+mode_exactDate = added_u
+strip_number = True",RandomForestClassifier,99.075008,99.761643,97.315436,98.305085
+,,DecisionTreeClassifier_CV,99.225116,99.743308,96.677741,98.644068
+,,DecisionTreeClassifier,99.045933,99.706637,96.345515,98.305085
+,,SVC_CV,98.687566,99.633297,95.681063,97.627119
+,,NeuralNetwork,98.188783,99.596626,95.959596,96.610169
+,,SVC,98.179091,99.578291,95.637584,96.610169
+,"exec_mode = full
+fact = 1.0
+oversamp = 0.2
+modification_ratio = 0.2
+sampling_fraction_reb = 0.1
+mode_exactDate = added_u
+strip_number = True",RandomForestClassifier,99.853147,99.908558,99.895857,99.977665
+,,DecisionTreeClassifier_CV,99.810658,99.881663,99.866131,99.970220
+,,NeuralNetwork,99.794997,99.876284,99.851290,99.977665
+,,DecisionTreeClassifier,99.789799,99.860147,99.858673,99.947886
+,,SVC,99.813676,99.860147,99.888360,99.918106
+,,SVC_CV,99.761495,99.827874,99.851190,99.910661
+,"exec_mode = tune
+fact = 1.0
+oversamp = 0
+sampling_fraction_reb = 0.1
+mode_exactDate = added_u
+strip_number = True",RandomForestClassifier,99.234808,99.761643,97.000000,98.644068
+,,DecisionTreeClassifier,99.045933,99.706637,96.345515,98.305085
+,,DecisionTreeClassifier_CV,99.365532,99.706637,95.737705,98.983051
+,,SVC_CV,98.028983,99.596626,96.271186,96.271186
+,,NeuralNetwork,98.179091,99.578291,95.637584,96.610169
+,,SVC,98.009600,99.559956,95.622896,96.271186

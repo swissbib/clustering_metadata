@@ -35,7 +35,7 @@ def save_notebook_results (notebook, path, file_name) :
 # Determine name of model
 def get_model_name (model) :
     if model.__class__.__name__ == 'Sequential' :
-        return 'Neural Network'
+        return 'NeuralNetwork'
     else :
         return model.__class__.__name__
 
@@ -91,7 +91,7 @@ def add_result_to_results (path, validation_scores, model, X, y, y_pred, suffix=
 
     return save_dict_results(results_dictionary, path, filename)
 
-def run_notebooks(notebook_list, runtime_param_dict_list, run, path) :
+def run_notebooks(notebook_list, runtime_param_dict, run, path) :
     for i in range(len(notebook_list)):
         print('Executing notebook', notebook_list[i])
         with open(notebook_list[i]) as ntbk:
@@ -101,12 +101,14 @@ def run_notebooks(notebook_list, runtime_param_dict_list, run, path) :
             orig_parameters = nbp.extract_parameters(nb)
             # Update parameters
             params = nbp.parameter_values(orig_parameters,
-                                          execution_mode=runtime_param_dict_list[run]['em'],
-                                          oversampling=runtime_param_dict_list[run]['os'],
-                                          modification_ratio = runtime_param_dict_list[run]['mr'],
-                                          factor=runtime_param_dict_list[run]['fa'],
-                                          exactDate_mode = runtime_param_dict_list[run]['me'],
-                                          strip_number_digits = runtime_param_dict_list[run]['sn']
+                                          execution_mode=runtime_param_dict['em'],
+                                          oversampling=runtime_param_dict['os'],
+                                          modification_ratio = runtime_param_dict['mr'],
+                                          sampling_fraction_nreb = runtime_param_dict['dsn'],
+                                          sampling_fraction_reb = runtime_param_dict['dsw'],
+                                          factor=runtime_param_dict['fa'],
+                                          exactDate_mode = runtime_param_dict['me'],
+                                          strip_number_digits = runtime_param_dict['sn']
                                          )
             # Make notebook object with these definitions, ...
             nb = nbp.replace_definitions(nb, params, execute=False)
