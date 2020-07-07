@@ -1,33 +1,61 @@
-Im swissbib Projekt ist die Essenz all unserer Aktivitäten der Umgang mit und die Aufbereitung von (Meta) - Daten. Normalisieren, Anreichern, Clustern (Zusammenführen) sowie Verknüpfen von Informationen und dies alles auf maschineller Basis ist die Grundlage dafür, dass wir Services wie verschiedene Discoveries, unterschiedliche Schnittstellen oder Dienstleistungen für Dritte anbieten können.
+Im swissbib Projekt ist die Essenz all unserer Aktivitäten der Umgang mit und die Aufbereitung von (Meta-) Daten. Normalisieren, Anreichern, Clustern (Zusammenführen) sowie Verknüpfen von Informationen und dies alles auf maschineller Basis ist die Grundlage dafür, dass wir Services wie verschiedene Discoveries, unterschiedliche Schnittstellen oder Dienstleistungen für Dritte anbieten können.
 
 
-Vor allem für das maschinelle Clustern von Daten nutzen wir die (kommerzielle) Software eines Partners, die es uns flexibel ermöglicht, Daten so aufzubereiten, dass man sie für die unterschiedlichen Services einsetzen kann. Dies war kein statischer Vorgang in dem Sinne, dass die Software einmal geschrieben war und dann ihren Dienst erfüllen konnte sondern ein iterativer Prozess über Jahre, in denen sowohl wir (in den letzten Jahren vor allem unsere Kollegin Silvia Witzig) von der Nutzerinnenseite als auch unser Partner gegenseitig Wissen in den Prozess zur Verbesserung der Datenaufbereitung einbrachten.
+Vor allem für das maschinelle Clustern (Deduplizieren) von Daten nutzen wir die (kommerzielle) Software eines Partners, die es uns flexibel ermöglicht, Daten so aufzubereiten, dass man sie für die unterschiedlichen Services einsetzen kann. Dies war kein statischer Vorgang in dem Sinne, dass die Software einmal geschrieben war und dann ihren Dienst erfüllen konnte sondern ein iterativer Prozess über Jahre, in denen sowohl wir vom swissbib Team als auch unser Partner gegenseitig Wissen in den Prozess zur Verbesserung der Datenaufbereitung einbrachten.
 
 
 Seit gefühlt zwei, drei Jahren lassen sich kaum mehr Artikel zum Thema Daten und Informationen finden, in denen nicht mindestens einmal Begriffe wie "Maschinelles Lernen", "Artificial Intelligence" (AI) oder "Neuronale Netze" erwähnt und als das Erfolgsrezept für die Zukunft beschrieben werden. Sollte damit das, was wir in den letzten 12 Jahren gemacht haben zum alten Eisen zählen und nicht mehr relevant sein? Da wir ja nun nicht dafür bekannt sind, eine Scheu vor neuen Softwaretechnologien zu haben, schauen wir schon immer regelmässig "über den Gartenzaun" um mitzubekommen, ob sich die neuen Methoden nicht mit unseren "klassischen" Methoden verbinden liessen. Das Problem dabei: Bevor man aus der Menge des Möglichen etwas vielleicht gut Versprechendes wählen, ausprobieren und dann vielleicht produktiv einsetzen  kann, muss man sich erstmal durch die Grundlagen und Begrifflichkeiten des neuen Themengebiets kämpfen. Nicht so einfach für ein swissbib Team, dass mit Personen nicht üppig ausgestattet ist und den Laden (sprich die "grünen, orangenen oder wie auch immer farblichen Services") am Laufen halten muss.
 
 
-Helfen kann in so einer Situation, manchmal, Begeisterung für die Sache, Offenheit (auch von Software) und ein Netz von Personen, die man, auch wenn sie von ausserhalb und nicht aus dem "Bibliothekskuchen" kommen, neugierig machen und letztendlich davon überzeugen kann, dass "unsere Daten" die Basis für coole Projekte sein können. So geschehen mit Andreas Jud, ein Freund, der sich in einer Weiterbildung an der EPF Lausanne mit Methoden des maschinellen Lernes beschäftigt hat. Im Rahmen seines Abschlussprojekts hat er untersucht, welche der zahlreichen Methodiken sich für das Clustern von bibliographischen Metadaten einsetzen liessen. Auf diesem Blog wird er in die ausgewählten Methoden und Ergebnisse  einführen,  die komplette Dokumentation ist als eine Serie von Jupyternotebooks frei verfügbar.
+
+In solchen Situationen der eigenen Begrenztheit kann Offenheit und die Möglichkeit der unkomplizierten Zusammenarbeit helfen. Andreas Jud (link Twitter, linkedin?), einem Freund eines swissbib Teammitglieds, der sich bei einer Weiterbildung an der EPFL Lausanne (link?) mit Methoden des maschinellen Lernens beschäftigt hatte, konnten wir dafür begeistern, im Rahmen seiner Abschlussarbeit die Daten von swissbib zu verwenden.
 
 
-Wie weiter? Die Abschlussarbeit an der EPFL ist eine tolle Basis, auf der sich weiter aufbauen lässt. Die Ergebniscluster sind von guter Qualität.
-
-Bereiche, an denen gearbeitet werden kann/muss/sollte:
+Das Thema des Abschlussprojekts:
 
 
-    Für die genutzten Modelle im Rahmen des maschinellen Lernens mussten Featurematrizen generiert werden. Die Daten, welche in den Features berücksichtigt wurden, haben, wegen des knappen Zeitrahmens und weil es sich um ein "Freizeitprojekt" handelt noch nicht die Qualität und Ausprägung, wie wir das in Jahren auf unserer produktiven swissbib Komponente entwickeln konnten.
-    Skalierbarkeit des Verfahrens.
-    Die Projektarbeit von Andreas hatte ihren Schwerpunkt im Gegenüberstellen und Ergebnisvergleich unterschiedlicher Methoden. Optimierunsmöglichkeiten in der Verarbeitung wurden bisher nicht berücksichtigt. Aktuell fassen wir zwei Varianten ins Auge:
+"Deduplizierung von bibliographischen Metadaten mit Methoden des maschinellen Lernens"
 
-        Ähnlich wie in unserem produktiven System können sogenannte "Pre-cluster" gebildet, so dass der Datenraum, auf den die Verfahren angewendet werden, sehr viel kleiner wird.
-        Seit drei Jahren beschäftigen wir uns im Projekt mit Softwarekomponenten, die für die verteilte Verarbeitung eingesetzt werden. In anderen Posts auf diesem Blog haben wir darüber bereits berichtet . Dies gibt uns einige Möglichkeiten, Lösungen für das Skalierungsproblem zu finden. Kommt hinzu, dass wir im Rahmen des Memobaseprojekts den Grossteil der Infrastruktur für das Projekt auf einem Kubernetes Cluster der Uni Basel aufsetzen. Hier lernen und sehen wir, dass in vielleicht zwei bis drei Jahren die Frage von knappen Rechnerressourcen ein viel geringere Rolle als z.T. heute noch spielen wird. Die Abstraktionsschicht Kubernetes lässt leicht zwischen der eigenen (privaten) Cloud oder einer Public Cloud wie Google und Co., auch nur temporär, wechseln.
 
-    "Die Mischung machts"
-    Auch wenn die Ergebnisse der Abschlussarbeit vielversprechend und die Möglichkeiten moderner offener Software noch so cool sind, bleibt der alte Spruch "garbage in, garbage out". Modelle des maschinellen Lernens müssen trainiert werden und die in die Modelle einfliessenden Daten möglichst von guter Qualität. Auch ist dies nicht ein einmaliger, statischer Vorgang sondern ein iterativer. Für diesen Prozess braucht es sowohl Menschen, die sich mit Daten und auch Formaten auskennen, als auch Personen auf der Softwareseite. Mit unseren swissbib Erfahrungen bringen wir Know-How auf beiden Seiten ein und werden auch versuchen, in den kommenden 6 Monaten unsere Expertise, die wir mit der "klassischen" Komponente gesammelt haben und die uns nach wie vor hervorragende Ergebnisse liefert, noch besser zu dokumentieren. 
-    Ein offenes Projekt mit vielen Wegen und Möglichkeiten.
-    Als "Freizeitprojekt" kann man über knappe Ressourcen klagen, gleichzeitig bietet dies aber auch vielfältige Einstiegsmöglichkeiten für Personen mit unterschiedlichem Hintergrund. Es war lustig mit anzusehen, wie Andreas als promovierter Physiker mit Interesse und Ausdauer die MARC-Regeln der LOC studiert und den Input aus unserem swissbib Team für sein Arbeit aufgenommen hat. Das nun vorliegende Ergebnis, wie Methoden des maschinellen Lernens auf den Bereich "Aggregation (Clustern) von bibliographischen Metadaten" angewendet werden können, bietet für Menschen mit eher informationswissenschaftlichem Hintergrund eine Möglichkeit, die Magie, die mit den Themen maschinelles Lernen und AI einherzugehen scheint, besser anzupacken. Wir freuen uns dazu über Rückmeldungen und versuchen, in diesem Blog weiter zu berichten.
-      
+Ziel war es, die Ergebnisse unterschiedlicher Methoden einander gegenüberzustellen und miteinander zu vergleichen.
 
-Eine Anekdote zum Abschluss.
 
-Bei der Verteidigung des Projekts an der EPFL sassen Andreas Prüfer gegenüber, die äusserten, dass er mit einem "tollen Datensatz" gearbeitet hat und natürlich auch seine Ergebnisse lobten. Das hat selbstverständlich auch uns gefreut. Vielleicht ist dies aber auch ein Satz, der zum Nachdenken darüber anregt, ob unsere Daten nicht mehr verdient haben, als nur in ein Bibliothekssystem mit relationalem Datenbankssystem gesteckt zu werden.
+Im Rahmen dieser kleinen Blogserie möchten wir ihnen die Ergebnisse der Arbeit soweit wie möglich aufbereiten und vermitteln. Am meisten würde es uns freuen, wenn wir Ihre Neugier und Interesse für das Themengebiet wecken könnten. Verfahren des Clusterns, das heisst das Zusammenführen von ähnlichen/identischen Informationen, lassen sich nicht nur auf Titeldaten bibliographischer Beschreibungen (so wie wir das in swissbib in den letzten Jahren gemacht haben) einsetzen. Das Einsatzgebiet liesse sich leicht auf z.B. Personen und Organisationen ausweiten. Wir überlassen es Ihnen, sich weitere Einsatzformen zu überlegen. Im Rahmen des swissbib Projekts (oder dessen Nachfolgeaktivitäten) sehen wir weitere Einsatzfelder aktuell z.B. in folgenden Bereichen:
+
+     Verlinkung von Personen und Organisationen im Rahmen unseres ID Hubs nicht nur über Identifier aus Normdaten sondern auch weniger eindeutigen Datenfeatures.
+    Identifizierung vor allem von Personen innerhalb unseres aktuellen memobase Projekts.  
+
+
+
+Der Aufbau unserer Blogserie orientiert sich am Buch
+
+Christen, P. (2012). Data matching. Springer.
+
+
+ Christen unterteilt den Data Matchingprozes in mehrere Schritte:
+
+
+    Data Pre-Processing
+    Indexing
+    Record Pair Comparison
+    Record Pair Classification
+    Evaluation of Matching Quality and Complexity
+
+
+In seinen Blogbeiträgen wird sich Andreas auf die Schritte 3 bis 5 konzentrieren und versuchen uns zu vermitteln, welchen Zielerreichungsgrad Methoden des maschinellen Lernens haben können. Die Neugierigen unter Ihnen können natürlich auch versuchen, die Details der Ergebnisse in den Jupyter Notebooks 0 - 8 auf der Projektseite nachzuvollziehen.
+
+ 
+
+Das Verständnis und der Einsatz von Algorithmen ist wichtig, nicht minder wichtig ist aber auch der Schritt 1: das "Data Pre-Processing". Entsprechend aufbereitete (normalisierte) Daten sind absolut notwendig, um qualitative Features für die Modellerstellung als Input für die Methoden des maschinellen Lernens zu generieren. Hier kommt die Expertise der Metdatenspezialistin des swissbib Teams, Silvia Witzig, sowie die langjährige praktische Erfahrung im Rahmen des swissbib Projekts, auch für Drittprojekte wie SLSP, zur Geltung. Am Ende der Blogserie werden wir versuchen, die Kombination dieser praktischen Erfahrungen mit den Anforderungen neuer Verfahren des maschinellen Lernens zu verknüpfen und entsprechend aufzubereiten und zu dokumentieren.
+
+ 
+
+Was versteckt sich nun hinter dem Begriff des Indexing im Schritt 2 ?
+Etwas was wir auf Basis unserer kommerziellen Software bei swissbib ebenfalls schon lange einsetzen: Das sogenannte "Pre-clustern" von Daten, dass heisst die Bildung von vielen Datensets, die aufgrund der Kriterien, nach denen Informationen miteinander in Verbindung gestellt werden sollen, im Vorfeld des eigentlichen Clustern von Informationen gebildet werden. Dadurch verringert sich die Komplexität vor allem der Schritte 3 und 4 erheblich. Im Rahmen des produktiven swissbib Betrieb setzen wir für dieses Pre-clustern von Daten auf Indexbildung mit Informationen, die wir aus der relationalen Datenbank unserer Software erhalten. Alternativen zu dieser eher klassischen Technik sind heute Methoden der Skalierung unter Einsatz von Big Data Frameworks wie Apache Flink teilweise im Zusammenspiel mit Apache Beam oder Apache Spark. Im swissbib Projekt beschäftigen wir uns seit zwei Jahren vor allem mit den beiden Erstgenannten. In anderen Kontexten haben wir die Integration derartiger Komponenten in eine Datenplattform bereits vorgestellt.   
+
+
+ 
+Es lässt sich zusammenfassen:
+Der Umgang mit Daten ist heute nicht mehr eine "One-Person" oder "One Company" Veranstaltung hinter einem verschlossenen Vorhang. Es ist ein Zusammenspiel unterschiedlicher Rollen wie Informationsspezialistinnen, Softwareentwicklerinnen und Personen auch ausserhalb des Bibliothekskuchens wie einem promovierten Physiker. Wichtig ist die Offenheit und freie Verfügbarkeit von Software und der ungehinderte Austausch von Informationen. Auch die Hoffnung, dass die Bibliotheken erkennen, dass sie einen Datenschatz besitzen, mit dem sich etwas anfangen lässt. So wie es die Prüfer der EPFL bei der Verteidigung des Abschlussprojekts gegenüber Andreas ausdrückten: Dass er mit einem "tollen Datensatz" arbeiten konnte.   
+ 
+
