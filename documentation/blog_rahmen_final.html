@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<script type="text/javascript">
+        function show1_20_04_2020(str){
+            document.getElementById('sh2_20_04_2020').style.display = 'none';
+            document.getElementById('sh1_20_04_2020').style.display = 'block';
+        }
+        function show2_20_04_2020(sign){
+            document.getElementById('sh2_20_04_2020').style.display = 'block';
+            document.getElementById('sh1_20_04_2020').style.display = 'none';
+        }
+    </script>      <input checked="checked" name="r1_20_04_2020" onchange="show1_20_04_2020(this.value)" type="radio" />     <b>Deutsche Version</b>      <input id="20_04_2020" name="r1_20_04_2020" onchange="show2_20_04_2020()" type="radio" />     <b>english version</b>  <br />
+<div id="sh1_20_04_2020">
+<h2 style="text-align: left;">
+            Jahrelange Erfahrung in der Aufbereitung und Verarbeitung von Metadaten trifft auf Maschinelles Lernen</h2>
+<br />
+<div style="line-height: 100%; margin-bottom: 0in;">
+Seit gefühlt zwei,
+drei Jahren lassen sich kaum mehr Artikel zum Thema Daten und
+Informationen finden, in denen nicht mindestens einmal Begriffe wie
+"Maschinelles Lernen", "Künstliche Intelligenz"
+(KI) oder "Neuronale Netze" erwähnt und als das
+Erfolgsrezept für die Zukunft beschrieben werden. Sollte damit das,
+was wir in den letzten 12 Jahren gemacht haben, veraltet und nicht
+mehr relevant sein? Das swissbib Team ist ja nicht dafür bekannt,
+sich vor neuen Softwaretechnologien zu scheuen. Wir schauen schon
+seit je her regelmässig über den Tellerrand um mitzubekommen, ob
+sich neue Methoden nicht mit unseren klassischen Methoden verbinden
+lassen. Das Problem dabei: Bevor man aus der Menge des Möglichen
+etwas Vielversprechendes wählen, ausprobieren und dann vielleicht
+produktiv einsetzen kann, muss man sich erstmal durch die Grundlagen
+und Begrifflichkeiten des neuen Themengebiets kämpfen. Nicht so
+einfach für ein swissbib Team, dass mit Personen nicht üppig
+ausgestattet ist und den Laden (sprich die "grünen, orangenen
+oder wie auch immer farbigen Services") am Laufen halten muss.</div>
+<br />
+<br />
+Helfen kann in so einer Situation manchmal Begeisterung für die
+Sache, Offenheit (auch von Software) und ein Netz von Personen von
+ausserhalb unseres Bibliothekskuchens, die man neugierig auf coole
+Projekte mit unseren Daten machen kann. So geschehen mit <a href="https://www.linkedin.com/in/andreas-jud-2a39a770/">Andreas
+Jud</a>, ein swissbib-Freund, der sich in einer Weiterbildung an der
+<a href="https://www.extensionschool.ch/">EPF Lausanne</a> mit
+Methoden des maschinellen Lernens beschäftigt hat. Im Rahmen seines
+Abschlussprojekts hat er untersucht, welche der zahlreichen Methoden
+sich für das Clustern von bibliographischen Metadaten einsetzen
+lassen. In dieser Blog-Serie wird er in die ausgewählten Methoden
+und Ergebnisse einführen. Die komplette Projektarbeit ist als eine
+Serie von <a href="https://github.com/swissbib/clustering_metadata/tree/capstone_project_andreas_jud_epfl_final_defense">Jupyter
+Notebooks</a> frei verfügbar.<br />
+<br />
+<br />
+Im swissbib Projekt ist die Essenz all unserer Aktivitäten der
+Umgang mit und die Aufbereitung von (Meta-) Daten. Normalisieren,
+Anreichern, Zusammenführen&nbsp; (Clustern) sowie Verknüpfen von
+Informationen und dies alles auf maschineller Basis ist die Grundlage
+dafür, dass wir Services wie verschiedene Discoveries,
+unterschiedliche Schnittstellen oder Dienstleistungen für Dritte
+anbieten können. Vor allem für das maschinelle Clustern von Daten
+nutzen wir die (kommerzielle) Software eines Partners, die es uns
+flexibel ermöglicht, Daten so aufzubereiten, dass man sie für die
+unterschiedlichen Services einsetzen kann. Dies war über die Jahre
+kein einmaliger Vorgang mit einem statischen Resultat sondern ein
+iterativer Prozess, in denen sowohl <a href="https://swissbib.blogspot.com/2019/01/die-personen-hinter-swissbib-les.html">wir</a>
+(in den letzten Jahren vor allem unsere Kollegin Silvia Witzig) von
+der Nutzerinnenseite als auch unser Partner gegenseitig Wissen in den
+Prozess zur Verbesserung der Datenaufbereitung einbrachten. Die
+Aktivitäten zur Datenaufbereitung bleiben zentral für die Qualität
+der Dienstleistungen, die swissbib erbringt.<br /><br />
+<br />
+Maschinelles Lernen basiert auf Daten. Daten von swissbib sind
+daher die Basis der Abschlussarbeit von Andreas an der EPFL. Mit den
+Daten, die Andreas in ihrer Rohform vom swissbib Team erhalten hat,
+lassen sich Ergebniscluster von überzeugender Qualität ermitteln.
+Dies sei an dieser Stelle bereits vorweggenommen. Nach Abschluss der
+Arbeit bleiben aber Bereiche, an denen gearbeitet werden muss, um die
+Resultate in einen produktiven Betrieb zu überführen.<br />
+<ul>
+<li>
+<div align="left">
+Die Projektarbeit von Andreas hatte ihren
+ Schwerpunkt im Gegenüberstellen unterschiedlicher Methoden des
+ maschinellen Lernens. Fragen zur Skalierung der Datenmengen (wie wir
+ sie im swissbib Projekt mit 45 Millionen Aufnahmen bewältigen
+ müssen) konnten nicht berücksichtigt werden. Dieser offene Punkt
+ muss noch angegangen werden. <br />
+<br />
+Die Bildung von sogenannten
+ pre-cluster auf der inhaltlichen sowie der Einsatz von Frameworks
+ zur verteilten Verarbeitung wie <a href="https://flink.apache.org/" target="_blank">Apache
+ Flink</a> auf der technischen Ebene sind hier vielversprechende
+ Ansätze.<br /></div>
+</li>
+<li>
+<div align="left">
+Auch wenn die Ergebnisse der Abschlussarbeit
+ vielversprechend und die Möglichkeiten moderner offener Software
+ noch so cool sind, bleibt der alte Spruch "garbage in, garbage
+ out". Modelle des maschinellen Lernens müssen trainiert werden
+ und die in die Modelle einfliessenden Daten von möglichst guter
+ Qualität sein.&nbsp; Für diesen Prozess braucht es sowohl
+ Menschen, die sich mit Daten, deren Formaten aber auch deren
+ Inhalten auskennen, wie auch Personen auf der Softwareseite. Mit
+ unseren swissbib Erfahrungen bringen wir Know-How auf beiden Seiten
+ ein und werden auch versuchen, in den anstehenden Monaten unsere
+ Expertise, die wir mit unserer produktiven Komponente gesammelt
+ haben und die uns nach wie vor hervorragende Ergebnisse liefert,
+ noch besser zu dokumentieren. Damit erhoffen wir uns, Wissen zu
+ erhalten als auch weiterzugeben. Zudem möchten wir dieses Wissen
+ natürlich in verschiedenen Verfahren, wie zum Beispiel Maschinelles
+ Lernen, einsetzen können und dadurch auch die Chance für
+ Bibliotheken zur Weiterentwicklung nutzen.<br /></div>
+</li>
+<li>
+<div align="left">
+Die Rohdaten, welche für das Trainieren von
+ Maschinen verwendet wurden, haben noch nicht die Ausprägung und
+ Qualität, wie wir sie in Jahren auf unserer produktiven Maschine
+ aufbauen konnten. Ein nächster Schritt muss darin bestehen, auf
+ unseren Swissbib-Datenstandard aufzusetzen.<br /></div>
+</li>
+<li>
+<div align="left">
+Als Freizeitprojekt gestartet, bieten die
+ erarbeiteten Resultate Einstiegsmöglichkeiten für Personen mit
+ unterschiedlichem Hintergrund. Es war erfreulich zu beobachten, wie
+ Andreas als promovierter Physiker mit Interesse und Ausdauer die
+ <a href="https://www.loc.gov/marc/bibliographic/">MARC-Regeln der
+ LOC</a> studiert und den Input aus unserem swissbib Team für sein
+ Arbeit aufgenommen hat. Das nun vorliegende Ergebnis, wie
+ maschinelles Lernen auf den Bereich der Aggregation von
+ bibliographischen Metadaten (Clustern) angewendet werden kann,
+ bietet die Möglichkeit, die Magie besser zu fassen, die mit
+ maschinellem Lernen und KI einhergeht. Dies auch für Menschen mit
+ einem informationswissenschaftlichen und weniger technischen
+ Hintergrund.
+ </div>
+</li>
+</ul>
+Wir freuen uns, wenn Sie unsere Blogserie zum Thema Deduplizierung
+von bibliographischen Daten mit Methoden des Maschinellen Lernens
+mitverfolgen. Noch mehr freut uns die aktive Teilnahme am
+Themengebiet und der Diskussion darüber.<br /><br />
+Eine Anekdote zum Abschluss. Bei der Verteidigung des Projekts an
+der EPFL sass Andreas Prüfern gegenüber, die äusserten, dass er
+mit einem "grossartigen Datensatz" gearbeitet hat. Das hat
+selbstverständlich auch uns gefreut. Vielleicht ist dies aber auch
+ein Satz, der zum Nachdenken darüber anregt, ob unsere Daten nicht
+mehr verdient haben, als nur in ein Bibliothekssystem mit
+relationalem Datenbanksystem gesteckt zu werden.<br />
+<style type="text/css">
+  p { margin-bottom: 0.1in; line-height: 115% }
+  a:link { so-language: zxx }</style><br />
+<br /></div>
+<div id="sh2_20_04_2020" style="display: none;">
+<h2 style="text-align: left;">
+    Years of experience in the preparation and processing of metadata meets methods of Machine Learning</h2>
+<br />
+<div style="line-height: 100%; margin-bottom: 0in;">
+For what feels like
+two or three years now, it has been almost impossible to find
+articles on the subject of data and information in which terms such
+as "Machine Learning", "Artificial Intelligence"
+(AI) or "Neural Networks" are not mentioned at least once
+and described as the recipe for success for the future. Should this
+mean that what we have been doing over the last 12 years is outdated
+and no longer relevant? The swissbib team is not known to shy away
+from new software technologies. We have always thought outside the
+box to see if new methods can be combined with our classic methods.
+The problem with this is that before you can choose, try out and
+perhaps productively use something promising from the multitude of
+possible options, you first have to fight your way through the basics
+and terminology of the new topic. Not so easy for a swissbib team
+that is not lavishly staffed with people and has to keep the shop
+(i.e. the "green, orange or whatever colored services")
+running.</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<br /></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<br /></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+In such a situation,
+sometimes enthusiasm for the matter, openness (also about software)
+and a network of people from outside our library organisations who
+can be made curious about cool projects with our data can help. This
+is what happened to <a href="https://www.linkedin.com/in/andreas-jud-2a39a770/">Andreas
+Jud</a>, a swissbib friend who studied Machine Learning methods in a
+continuing education course at <a href="https://www.extensionschool.ch/">EPF</a><a href="https://www.extensionschool.ch/">L</a><a href="https://www.extensionschool.ch/">
+Lausanne</a>. As part of his final project, he investigated which of
+the numerous methods can be used for clustering bibliographic
+metadata. On this blog series he will introduce the selected methods
+and results. The complete project work is freely available as a
+series of <a href="https://github.com/swissbib/clustering_metadata/tree/capstone_project_andreas_jud_epfl_final_defense">Jupyter
+notebooks</a>.</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<br /></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+In the swissbib
+project, the essence of all our activities is the handling and
+processing of (meta-) data. Normalizing, enriching, clustering
+(merging) as well as linking of information and all this on a machine
+basis is the foundation for our ability to offer services such as
+different discoveries, different APIs or services for third parties.
+Especially for the machine clustering of data we use the (commercial)
+software of a partner, which enables us to prepare data in a flexible
+way so that it can be used for different purposes. Over the years,
+this has not been a one-off process with a static result, but an
+iterative process in which <a href="https://swissbib.blogspot.com/2019/01/die-personen-hinter-swissbib-les.html">we</a>
+(in recent years especially our colleague Silvia Witzig) from the
+user side and our partner contributed mutual knowledge to the process
+of improving data preparation. Data preparation activities remain
+central to the quality of the services provided by swissbib.</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<br /></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+Machine learning is
+based on data. Data from swissbib is therefore the foundation of
+Andreas' thesis at EPFL. With the data Andreas received in its raw
+form from the swissbib team, the resulting clusters are already of
+convincing quality. This is already anticipated at this point. After
+completion of the work, however, there are still areas that need to
+be worked on in order to transfer the results into a productive
+operation.</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<br /></div>
+<ul>
+<li>
+<div style="line-height: 100%; margin-bottom: 0in;">
+The project
+ work of Andreas focused on the comparison of different methods of
+ machine learning. Questions concerning the scaling of data volumes
+ (as we have to cope with in the swissbib project with 45 million
+ recordings) could not be considered. This open point still needs to
+ be addressed.
+ </div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+The formation of
+ so-called pre-clusters on the content level and the use of
+ frameworks for distributed processing such as <a href="https://flink.apache.org/" target="_blank">Apache Flink</a> on the
+ technical level are promising approaches here.</div>
+</li>
+<li>
+<div style="line-height: 100%; margin-bottom: 0in;">
+Even if the
+ results of the thesis are promising and the possibilities of modern
+ open software are still cool, the old saying "garbage in,
+ garbage out" remains. Machine learning models must be trained
+ and the data used in the models must be of the best possible
+ quality.&nbsp; This process requires both people who are familiar
+ with data, its formats and contents, and people on the software
+ side. With our swissbib experience, we are contributing know-how on
+ both sides, and in the coming months we will also try to document
+ even better the expertise we have gained with our productive
+ component, which continues to deliver excellent results. In this
+ way, we hope to preserve and pass on knowledge. In addition, we
+ would of course like to be able to use this knowledge in various
+ processes, such as machine learning, and thus also take advantage of
+ the opportunity for libraries to develop further.<br />
+<br /></div>
+</li>
+<li>
+<div style="line-height: 100%; margin-bottom: 0in;">
+The raw data,
+ which were used for the training of machines, do not yet have the
+ characteristics and quality as we could build them up in years on
+ our productive machine. The next step must be to build on our swissbib data standard.<br />
+<br /></div>
+</li>
+<li>
+<div style="line-height: 100%; margin-bottom: 0in;">
+Launched as a
+ leisure project, the results obtained offer entry opportunities for
+ people with different backgrounds. It was gratifying to observe how
+ Andreas, who holds a doctorate in physics, studied the MARC rules of
+ the LOC with interest and perseverance and took up the input from
+ our swissbib team for his work. The result now available on how
+ machine learning can be applied to the field of aggregation of
+ bibliographic metadata (clusters) offers the opportunity to better
+ grasp the magic that goes along with machine learning and AI. This
+ also applies to people with an information science and less
+ technical background.</div>
+</li>
+</ul>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<br />
+We would be
+pleased if you follow our blog series on the topic of deduplication
+of bibliographic data using machine learning methods. We are even
+more pleased about the active participation in and discussion of the
+topic.<br />
+<br />
+A closing anecdote. While defending the project at
+the EPFL, Andreas sat across from examiners who said that he had
+worked with a "great data set". Of course, we were pleased
+about that, too. But perhaps this is also a sentence that makes you
+think about whether our data didn't deserve more than just being put
+into a library system with a relational database system.</div>
+<style type="text/css">
+  p { margin-bottom: 0.1in; line-height: 115% }
+  a:link { so-language: zxx }</style><style type="text/css">
+  p { margin-bottom: 0.1in; line-height: 115% }
+  a:link { so-language: zxx }</style><br />
+<style type="text/css">
+  p { margin-bottom: 0.1in; line-height: 115% }
+  a:link { so-language: zxx }</style>
+
+</div>
+</div>
+
+
+</body>
+</html>

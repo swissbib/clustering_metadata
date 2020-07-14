@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div style="text-align: left;">
+</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">The
+notion of Machine Learning includes a wide group of statistical
+algorithms where a computer system learns on a set of training data
+and, after having completed its learning phase, uses its experience
+to generate predictions on new, unknown data. In the context of the
+capstone project of an advanced online training course at EPF
+Lausanne, a Swissbib admirer takes the challenge to do Machine
+Learning with a set of library catalogue data in MARC 21 format. The
+goal of the project is to build an artifical machine being capable to
+find duplicate records in the data. The project is done with three
+distinct groups of models. In this blog, the results of two
+classifiers of the Ensemble family, a DecisionTree and RandomForests
+model will be presented.</span></span></span></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">The
+starting point for Machine Learning is data. The data generally
+consists of two distinct types of variables, features and its target.
+The variables of the data set that serve as input for computing the
+prediction are called features. The features of the data are
+constructed with the help of two records of original Swissbib data
+containing raw information of a bibliographic unit, each. Such two
+records of raw data are paired in each of its attributes, calculating
+a numerical similarity distance for each pair of same attributes of
+the two bibliographical records, see&nbsp;</span></span></span><a href="https://www.blogger.com/Figure%204"><span style="color: #337ab7;"><span style="font-family: &quot;calibri&quot; , serif;"><span style="font-size: x-small;"><u>Figure
+1</u></span></span></span></a><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">.
+For example, for two arbitrary records, the mathematical distance
+between title</span></span></span><span style="color: black;"><sub><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: xx-small;">1</span></span></sub></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">&nbsp;(title
+of record 1) and title</span></span></span><span style="color: black;"><sub><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: xx-small;">2</span></span></sub></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">&nbsp;(title
+of record 2) are determined to be the feature titleΔ =&nbsp;</span></span></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;"><i>sim</i></span></span></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">(title</span></span></span><span style="color: black;"><sub><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: xx-small;">1</span></span></sub></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">,
+title</span></span></span><span style="color: black;"><sub><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: xx-small;">2</span></span></sub></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">),
+where&nbsp;</span></span></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;"><i>sim</i></span></span></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">(x</span></span></span><span style="color: black;"><sub><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: xx-small;">1</span></span></sub></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">,
+x</span></span></span><span style="color: black;"><sub><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: xx-small;">2</span></span></sub></span><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">)
+is a mathematical similarity function. For the project at hand,
+twenty distinct similarities of two times twenty raw data attributes
+like title, author, year, isbn, ismn, etc. are calculated for each
+feature record. Therefore, the number of features is twenty. A
+feature record is represented as an array in the memory of a computer
+system. All rows of feature arrays can be represented in the form of
+a&nbsp;</span></span></span><a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)"><span style="color: #337ab7;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;"><u>matrix</u></span></span></span></a><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">.
+Therefore, the full set of this data is called feature matrix. The
+total of feature records used for training the data is nearly
+260'000.</span></span></span></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="https://1.bp.blogspot.com/-8F4DUlsBhew/Xw3-ympKP1I/AAAAAAAAAFY/b1r7r0XuoLkt5miIggObMNG6oqQti-cYwCLcBGAsYHQ/s1600/01_record_pairing.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="546" data-original-width="1221" height="143" src="https://1.bp.blogspot.com/-8F4DUlsBhew/Xw3-ympKP1I/AAAAAAAAAFY/b1r7r0XuoLkt5miIggObMNG6oqQti-cYwCLcBGAsYHQ/s320/01_record_pairing.png" width="320" /></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;">Figure1: Records pairing</td></tr>
+</tbody></table>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">The
+variable of a data set that is to be predicted by the machine is
+called output or target, see&nbsp;</span></span></span><a href="https://www.blogger.com/Figure%204"><span style="color: #337ab7;"><span style="font-family: &quot;calibri&quot; , serif;"><span style="font-size: x-small;"><u>Figure
+2</u></span></span></span></a><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">.
+Each feature record has its target value. For each feature record of
+the project described above, the target variable indicates whether a
+data row of features is either a row of unique records or a row of
+duplicate records. The possible target values are 0 (row of unique
+records) or 1 (row of duplicate records), resp.. A more detailed
+description on how to calculate the feature matrix and its array of
+target values for the training data will be given in a later blog to
+come.</span></span></span><br />
+<br />
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="https://1.bp.blogspot.com/-5GX-4NSv0cc/Xw4B1yzu7NI/AAAAAAAAAFk/AIdYlKFV1IIu7_ePT6Xj05nCt8dQSji7ACLcBGAsYHQ/s1600/02_feature_matrix_machine_target.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="547" data-original-width="1221" height="143" src="https://1.bp.blogspot.com/-5GX-4NSv0cc/Xw4B1yzu7NI/AAAAAAAAAFk/AIdYlKFV1IIu7_ePT6Xj05nCt8dQSji7ACLcBGAsYHQ/s320/02_feature_matrix_machine_target.png" width="320" /></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;">Figure 2: <span style="color: black;"><span style="font-family: &quot;times new roman&quot; , serif;"><span style="font-size: x-small;">Feature
+matrix, machine, and target</span></span></span>
+
+
+
+
+
+
+
+
+<br />
+<div align="center" style="line-height: 100%; margin-bottom: 0in;">
+<br /></div>
+<style type="text/css">
+		p { margin-bottom: 0.1in; direction: ltr; line-height: 115%; text-align: left; orphans: 2; widows: 2 }
+		a:link { color: #0000ff }</style></td></tr>
+</tbody></table>
+<br /></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">The
+idea behind a DecisionTree algorithm is that the computer system
+learns a set of sequential if-then-else rules that lead to a final
+decision. Each if-then-else statement is called a node of the
+DecisionTree. The nodes are arranged in sequences to form of a binary
+tree, see&nbsp;</span></span></span><a href="https://www.blogger.com/Figure%204"><span style="color: #337ab7;"><span style="font-family: &quot;calibri&quot; , serif;"><span style="font-size: x-small;"><u>Figure
+3</u></span></span></span></a><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">,
+which is the reason for its naming. In the Swissbib project, the set
+of if-then-else rules is a sequence of thresholds for binary
+statements of one feature variable that can either be lower or higher
+than the specific threshold. To classify a feature record, the
+algorithm starts at the top of the tree and evaluates the statement
+in each node on its path down. Depending on the threshold value, the
+algorithm decides for the right-lower or the left-lower node as the
+next node until reaching the bottom of the tree. The final decision
+is called a leaf of the DecisionTree. The leaf concludes the decision
+wether the feature record is a pair of uniques or a pair of
+duplicates. During training a DecisionTree, the if-then-else rules of
+the nodes are adjusted iteratively until the DecisionTree predicts
+the target value of the training data feature rows with the highest
+possible probability according to a function to measure the quality
+of decisions, called criterion. When this highest power of prediction
+on the training data is reached, the DecisionTree can be used for
+predicting new, unseen data.</span></span></span><br />
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="https://1.bp.blogspot.com/-prPpr8DGHQM/Xw4CN_wdwtI/AAAAAAAAAFs/cuA2xM62iKsTXD0CMWg4dpoaXpn0EaJGQCLcBGAsYHQ/s1600/03_graphical_representation_decision_tree.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="179" data-original-width="400" height="143" src="https://1.bp.blogspot.com/-prPpr8DGHQM/Xw4CN_wdwtI/AAAAAAAAAFs/cuA2xM62iKsTXD0CMWg4dpoaXpn0EaJGQCLcBGAsYHQ/s320/03_graphical_representation_decision_tree.png" width="320" /></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;">Figure 3: Graphical Representation of the Decision Tree on Swissbib Data</td></tr>
+</tbody></table>
+<br /></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">DecisionTree
+is the most basic algorithm in the family of Ensemble methods of
+Machine Learning. Its advantage is its clarity. It can be easily
+interpreted when looking at the trained model tree. A DecisionTree
+classifier can be built with the help of different parameters. In the
+project, the varied parameters are the maximum depth of the tree as
+well as the so called criterion, the mathematical function to measure
+the quality of a split in the nodes. Several specific DecisionTrees
+are calculated with the help of&nbsp;</span></span></span><a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)"><span style="color: #337ab7;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;"><u>cross-validation</u></span></span></span></a><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">&nbsp;and
+their prediction power is compared. The project finds the best
+DecisionTree for Swissbib data to have a maximum depth of 26 nodes
+and a criterion of&nbsp;</span></span></span><a href="https://en.wikipedia.org/wiki/Decision_tree_learning"><span style="color: #337ab7;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;"><u>Gini
+impurity</u></span></span></span></a><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">.</span></span></span></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">The
+performance of a Machine Learning classifier can be measured with the
+help of some metrics derived from the confusion matrix, see&nbsp;</span></span></span><a href="https://www.blogger.com/Figure%204"><span style="color: #337ab7;"><span style="font-family: &quot;calibri&quot; , serif;"><span style="font-size: x-small;"><u>Figure
+4</u></span></span></span></a><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">.
+The confusion matrix compares the predictions of a trained machine on
+some validation data with their given target values. Four cases can
+be distinguished.</span></span></span></div>
+<ul>
+<li>
+<div style="line-height: 100%; margin-bottom: 0in; margin-top: 0.19in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">Two
+ "true" cases (1. "true positive" and 2. "true
+ negative") according to the two specific classes are the
+ correctly predicted records of the validation data.</span></span></span></div>
+</li>
+<li>
+<div style="line-height: 100%; margin-bottom: 0.19in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">Two
+ "false" cases (3. "false positive" and 4. "false
+ negative") according to the two specific classes are the
+ wrongly predicted records of the validation data.</span></span></span><br />
+<br />
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="https://1.bp.blogspot.com/-PV7tLlVISlc/Xw4Cf0SkApI/AAAAAAAAAF0/ZgnRi3_gnlsEMknrRyYpGTsWrb8C-68JwCLcBGAsYHQ/s1600/04_confusion_matrix.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="676" data-original-width="1600" height="135" src="https://1.bp.blogspot.com/-PV7tLlVISlc/Xw4Cf0SkApI/AAAAAAAAAF0/ZgnRi3_gnlsEMknrRyYpGTsWrb8C-68JwCLcBGAsYHQ/s320/04_confusion_matrix.png" width="320" /></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;">Figure 4: Confusion Matrix</td></tr>
+</tbody></table>
+<br /></div>
+</li>
+</ul>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">From
+the four cases above, a metrics called accuracy can be calculated,
+allowing a statement on the prediction quality of the model on
+unknown data. For Swissbib's calculated DecisionTree, an accuracy
+value of nearly 99.95% can be reached. This accuracy means 28 wrongly
+predicted records on a total of 51'886 validation records.</span></span></span></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">For
+comparison reasons, a RandomForests model is calculated additionally.
+A RandomForests is another method of the Ensemble family. It consists
+of several distinct DecisionTrees that are assembled during the
+learning phase. Again, the set of best parameters for the
+RandomForests is searched for Swissbib data and a number of 100 trees
+of maximum depth of 22 each in the forest was found to generate the
+best results. With RandomForests, an accuracy of nearly 99.95% can be
+reached, too. Here, a total of wrongly predicted records is 27 on the
+total of the validation records.</span></span></span></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">The
+project is implemented in programming language Python, using library
+scikit-learn for calculating the models. The RandomForests
+implementation of this library allows for assessing the importance of
+each feature for prediction.&nbsp;</span></span></span><a href="https://www.blogger.com/Figure%204"><span style="color: #337ab7;"><span style="font-family: &quot;calibri&quot; , serif;"><span style="font-size: x-small;"><u>Figure
+5</u></span></span></span></a><span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">&nbsp;shows
+the normed importance value of the features used. It can be seen that
+variable year is the leading variable for indicating wether a pair of
+records is a pair of uniques or of duplicates. Variable title is the
+second most important feature for the RandomForests model, but also
+author and volumes indication are of high relevance. The importance
+of features like coordinate and ismn seem to be low. This is due to
+the fact that only few of Swissbib's raw data are of format map of
+music. Therefore, only few of Swissbib's raw data hold any
+information in these attributes.</span></span></span><br />
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="https://1.bp.blogspot.com/-nMQZOVKJkrA/Xw4CodCOnNI/AAAAAAAAAF4/pvNtRNtr_LMQMXT2wTF58QIoHq6Tbso8ACLcBGAsYHQ/s1600/05_normed_feature_importance.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="200" data-original-width="400" height="159" src="https://1.bp.blogspot.com/-nMQZOVKJkrA/Xw4CodCOnNI/AAAAAAAAAF4/pvNtRNtr_LMQMXT2wTF58QIoHq6Tbso8ACLcBGAsYHQ/s320/05_normed_feature_importance.png" width="320" /></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;">Figure 5: Normed Feature Importance of RandomForests</td></tr>
+</tbody></table>
+<br /></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+<span style="color: black;"><span style="font-family: &quot;helvetica neue&quot; , serif;"><span style="font-size: x-small;">The
+results presented here, suggest Swissbib to implement a new
+deduplication process with the help of a RandomForests algorithm, due
+its best overall performance on the training data. The project
+described implements some more models different to the models of the
+Ensemble family. The results of those will be presented in some
+additional blog articles.</span></span></span></div>
+<div style="text-align: left;">
+<style type="text/css">
+  p { margin-bottom: 0.1in; direction: ltr; line-height: 115%; text-align: left; orphans: 2; widows: 2 }
+  a:link { color: #0000ff }</style></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+
+</body>
+</html>
