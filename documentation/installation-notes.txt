@@ -1,0 +1,5 @@
+https://github.com/grpc/grpc/issues/17829
+python -m pip install --upgrade setuptools
+
+run this to let you install tensorflow and wheels (at least on my ubuntu 18.04 environemnt)
+
