@@ -1,5 +1,39 @@
-https://github.com/grpc/grpc/issues/17829
-python -m pip install --upgrade setuptools
+1) download Projekt (branch weiterentwicklung)
+git clone git@github.com:swissbib/clustering_metadata.git
+2) cd clustering_metadata
+3) mkdir venv
 
-run this to let you install tensorflow and wheels (at least on my ubuntu 18.04 environemnt)
+4) welche Pythonversion hast Du installiert
+python3 --version
+Python 3.8.10
+python 3.8x geht nicht!
+Du arbeitest noch mit tensorflow 1.5.4
+dann darf python nicht grösser 3.7.x sein
+Ich habe mir 3.7.11 installiert
+
+wir können Dir auch eine eigene Version kompilieren
+schau erst mal welche Version bei Dir installiert ist
+
+Wenn es bei Dir mit 3.7 läuft, kann man später versuchem aug tensorflow 2.x umzusteigen.
+Das kann dann aber andere Probleme bringen
+
+5)
+python3 -m venv --copies [absolues Verzeichnis venv]
+6) im Projektverzeichnis
+source venv/bin/activate
+(dann arebietest Du mit der neu erstellten virtuellen Umgebung)
+7)
+pip install --upgrade pip
+pip install wheel
+
+pip install -r requirements.txt
+(es wird die komplette von Dir benötigte Umgebung installiert)
+
+
+8) start von jupyter
+(Voraussetzung Du bist im Projektverzeichnis und hast vorher
+source venv/bin/activate
+abgesetzt (s. Schritt 6)
+
+jupyter notebook
 
